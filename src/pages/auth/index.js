@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { login } from "../../service/auth";
 import { CenterLogo,LogoImage } from "../../components/common/Logo";
 import { EyeIcon, EyeOffIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
+import { ToastContainer, toast } from "react-toastify";
 import BackgroundImage from "../../assets/images/background-solgas.jpeg";
 import "../../assets/styles/css/auth/style.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthPage = () => {
 
@@ -12,10 +14,26 @@ const AuthPage = () => {
 
   const onSubmitForm = async (data) => {
     await login(data).then(res => {
-      alert("Bien");
+      toast.success("😎 Bienvenido a Solgas", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }).catch(err => {
-      alert("Mal");
-    })
+      toast.error("😟 Datos invalidos", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    });
   }
 
   const [passwordShow, setPasswordShow] = useState(false);
@@ -116,6 +134,7 @@ const AuthPage = () => {
           </div>
         </section>
       </main>
+      <ToastContainer />
     </>
   )
 }
