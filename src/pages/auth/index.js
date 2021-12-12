@@ -10,9 +10,12 @@ const AuthPage = () => {
 
   const { register, handleSubmit, formState : { errors }} = useForm();
 
-  const onSubmitForm = (data) => {
-    console.log(data);
-    login(data);
+  const onSubmitForm = async (data) => {
+    await login(data).then(res => {
+      alert("Bien");
+    }).catch(err => {
+      alert("Mal");
+    })
   }
 
   const [passwordShow, setPasswordShow] = useState(false);
