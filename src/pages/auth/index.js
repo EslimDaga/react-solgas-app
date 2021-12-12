@@ -1,7 +1,16 @@
+import { useState } from "react"
+import { CenterLogo,LogoImage } from "../../components/common/Logo";
 import BackgroundImage from "../../assets/images/background-solgas.jpeg";
-import SolgasLogo from "../../assets/images/logo-solgas.png"
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 
 const AuthPage = () => {
+
+  const [passwordShow, setPasswordShow] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordShow(passwordShow ? false : true);
+  }
+
   return (
     <>
     <main>
@@ -19,44 +28,41 @@ const AuthPage = () => {
             <div className="w-full lg:w-4/12 px-4">
               <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
                 <div className="rounded-t mb-0 px-6 py-6">
-                  <div className="mb-3">
-                    <img src={SolgasLogo} alt="logo" className="w-50 h-10"/>
-                  </div>
-                  <hr className="mt-6 border-b-1 border-gray-400" />
+                  <CenterLogo>
+                    <LogoImage/>
+                  </CenterLogo>
                 </div>
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                  <div className="text-gray-500 text-center mb-3 font-bold">
-                    <small>Or sign in with credentials</small>
-                  </div>
                   <form>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        className="block text-gray-700 text-base font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Email
+                        Nombre de Usuario
                       </label>
                       <input
                         type="email"
-                        className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Email"
+                        className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full"
                         style={{ transition: "all .15s ease" }}
                       />
                     </div>
-
                     <div className="relative w-full mb-3">
                       <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                        className="block text-gray-700 text-base font-bold mb-2"
                         htmlFor="grid-password"
                       >
-                        Password
+                        Contraseña
                       </label>
                       <input
-                        type="password"
-                        className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Password"
+                        type={passwordShow ? "text" : "password"}
+                        className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full"
                         style={{ transition: "all .15s ease" }}
                       />
+                      <div onClick={togglePasswordVisibility}>
+                        {passwordShow ? <EyeIcon className="h-5 w-5 text-dark-500 float-right relative bottom-8 right-3"/> : <EyeOffIcon className="h-5 w-5 text-dark-500 float-right relative bottom-8 right-3"/>}
+
+                      </div>
                     </div>
                     <div>
                       <label className="inline-flex items-center cursor-pointer">
@@ -66,42 +72,21 @@ const AuthPage = () => {
                           className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
                           style={{ transition: "all .15s ease" }}
                         />
-                        <span className="ml-2 text-sm font-semibold text-gray-700">
-                          Remember me
+                        <span className="ml-2 text-base font-semibold text-gray-700">
+                          Mantenme conectado
                         </span>
                       </label>
                     </div>
-
                     <div className="text-center mt-6">
                       <button
-                        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        className="bg-gray-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                         type="button"
                         style={{ transition: "all .15s ease" }}
                       >
-                        Sign In
+                        Iniciar Sesión
                       </button>
                     </div>
                   </form>
-                </div>
-              </div>
-              <div className="flex flex-wrap mt-6">
-                <div className="w-1/2">
-                  <a
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                    className="text-gray-300"
-                  >
-                    <small>Forgot password?</small>
-                  </a>
-                </div>
-                <div className="w-1/2 text-right">
-                  <a
-                    href="#pablo"
-                    onClick={e => e.preventDefault()}
-                    className="text-gray-300"
-                  >
-                    <small>Create new account</small>
-                  </a>
                 </div>
               </div>
             </div>
