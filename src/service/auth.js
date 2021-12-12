@@ -28,6 +28,9 @@ export const fechtData = async (username, token) => {
     }
   }).then(res => {
     console.log("Res Data", res.data);
-    return res.data
-  }).catch(error => console.log(error))
+    return res.data;
+  }).catch(error => {
+    console.log("Error fetchdata", error);
+    return error;
+  })
 }
