@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { login } from "../../service/auth";
 import { CenterLogo,LogoImage } from "../../components/common/Logo";
-import BackgroundImage from "../../assets/images/background-solgas.jpeg";
 import { EyeIcon, EyeOffIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
+import BackgroundImage from "../../assets/images/background-solgas.jpeg";
 import "../../assets/styles/css/auth/style.css";
 
 const AuthPage = () => {
 
   const { register, handleSubmit, formState : { errors }} = useForm();
 
-  const onSubmitForm = e => {
-    console.log(e);
+  const onSubmitForm = (data) => {
+    console.log(data);
+    login(data);
   }
 
   const [passwordShow, setPasswordShow] = useState(false);
