@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { LogoHeader } from "./common/LogoHeader";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon, LogoutIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
 export default function Example() {
@@ -41,7 +41,7 @@ export default function Example() {
               href="/"
               className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
             >
-              Cerrar Sesión
+              <LogoutIcon className="w-5 h-5 mr-2"/>Cerrar Sesión
             </a>
           </div>
         </div>
@@ -60,15 +60,10 @@ export default function Example() {
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
                 <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                    alt="Workflow"
-                  />
+                  <LogoHeader />
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
                 </div>
@@ -77,11 +72,19 @@ export default function Example() {
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Pricing
+                  Eventos
                 </a>
-
                 <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                  Docs
+                  Historial
+                </a>
+                <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                  Checkpoint
+                </a>
+                <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                  Conductores
+                </a>
+                <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                  Unidades
                 </a>
               </div>
               <div>
@@ -89,14 +92,8 @@ export default function Example() {
                   href="/"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                 >
-                  Sign up
+                  <LogoutIcon className="w-5 h-5 mr-2"/>Cerrar Sesión
                 </a>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?{' '}
-                  <a href="/" className="text-indigo-600 hover:text-indigo-500">
-                    Sign in
-                  </a>
-                </p>
               </div>
             </div>
           </div>
