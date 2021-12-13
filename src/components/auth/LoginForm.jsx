@@ -15,6 +15,8 @@ const LoginForm = () => {
     setLoading(true);
     await login(data).then(res => {
       toast.success("😎 Bienvenido a Solgas", {
+        className: "font-bold",
+        style: { fontFamily: 'Quicksand' },
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -26,6 +28,8 @@ const LoginForm = () => {
       setLoading(false);
     }).catch(err => {
       toast.error("😟 Datos invalidos", {
+        className: "font-bold",
+        style: { fontFamily: 'Quicksand' },
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
