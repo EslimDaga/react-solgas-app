@@ -1,4 +1,5 @@
 import axios from "axios";
+import cache from "../helpers/cache";
 import { api } from "../constants/global";
 
 export const login = async (data) => {
@@ -20,5 +21,6 @@ export const login = async (data) => {
     ...userInfo,
     token : access
   }
+  cache.setItem("user", user)
   return user;
 }
