@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
-import { api } from "../../constants/global";
-import cache from "../../helpers/cache";
+import { getEvents } from "../../service/event";
 
 const EventTable = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
-  const token = cache.getItem("user").token;
-
-  const loadEvents = async () => {
-    const response = await fetch(`${api}/control/web/api/get-events/`,{
-      headers: {
-        'Authorization': 'JWT ' + token,
-      }
-    });
-    const data = await response.json();
-    setEvents(data);
-  }
 
   useEffect(() => {
-    loadEvents();
-  });
+    getEvents().then(events => {
+      setIsLoading(false);
+      setEvents(events);
+    })
+  },[]);
   return (
   <>
     <div className="bg-white">
@@ -80,6 +72,7 @@ const EventTable = () => {
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
+                              {isLoading && <h1>Cargando</h1>}
                               {events.map((event) => (
                                 <tr key={event.id}>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.provider}</td>
