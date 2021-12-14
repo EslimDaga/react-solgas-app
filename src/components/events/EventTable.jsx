@@ -20,79 +20,91 @@ const EventTable = () => {
     loadEvents();
   });
   return (
-  <div className="bg-white">
-    <div className="pt-1">
-      <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
-        <section className="antialiased bg-gray-100 text-gray-600 w-full">
-          <div className="flex flex-col justify-center">
-            <div className="w-full mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-              <header className="px-5 py-4 border-b border-gray-100">
-                <h2 className="font-semibold text-gray-800">Eventos</h2>
-              </header>
-              <div className="p-3">
-                <div className="overflow-x-auto">
-                  <table className="table-auto w-full">
-                    <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
-                      <tr>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Proveedor</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Operador Logistico</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Placa</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Tipo de Servicio</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Checkpoint</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Nombre del Conductor</div>
-                        </th>
-                        <th className="p-2 whitespace-nowrap">
-                          <div className="font-bold">Fecha de Creación</div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-sm divide-y divide-gray-100">
-                      {events.map( event => (
-                      <tr key={event.id}>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">SEGURSAT</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap ">
-                          <div className="text-center">JEVARO</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">BCO-875</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">GRANEL</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">CHECK POINT PPAL</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">CABRERA CAMPOS, SALOMON</div>
-                        </td>
-                        <td className="p-2 whitespace-nowrap">
-                          <div className="text-center">13/12/2021 04:56 am</div>
-                        </td>
-                      </tr>
-                      ))}
-                    </tbody>
-                  </table>
+  <>
+    <div className="bg-white">
+      <div className="pt-1">
+        <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
+          <section className="antialiased bg-gray-100 text-gray-600 w-full">
+            <div className="flex flex-col justify-center">
+              <div className="w-full mx-auto bg-white shadow-lg rounded-lg border border-gray-200">
+                <div className="pr-3 pl-3">
+                  <div className="flex flex-col">
+                    <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
+                      <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
+                        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                          <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-blue-900">
+                              <tr>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Proveedor
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Operador Logistico
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Placa
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Tipo de Servicio
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Checkpoint
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Nombre del Conductor
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Fecha de Creación
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                              {events.map((event) => (
+                                <tr key={event.id}>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.provider}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.logistic_operator}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.unitid}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.type_of_service}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.checkpoint}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.driver_fullname}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.datetime}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
-  </div>
+  </>
   )
 }
 
