@@ -18,7 +18,7 @@ const EventTable = () => {
 
   useEffect(() => {
     loadEvents();
-  },[]);
+  });
   return (
   <div className="bg-white">
     <div className="pt-1">
