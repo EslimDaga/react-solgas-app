@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react";
+import { api } from "../../constants/global";
+import cache from "../../helpers/cache";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import Header from "../../components/Header";
 
 const EventPage = () => {
+  const [events, setEvents] = useState([]);
+  const token = cache.getItem("user").token;
+
+  const loadEvents = async () => {
+    const response = await fetch(`${api}/control/web/api/get-events/`,{
+      headers: {
+        'Authorization': 'JWT ' + token,
+      }
+    });
+    const data = await response.json();
+    setEvents(data);
+  }
+
+  useEffect(() => {
+    loadEvents();
+  });
+
   return (
     <>
       <Header/>
@@ -44,7 +64,8 @@ const EventPage = () => {
                           </tr>
                         </thead>
                         <tbody className="text-sm divide-y divide-gray-100">
-                          <tr>
+                          {events.map( event => (
+                          <tr key={event.id}>
                             <td className="p-2 whitespace-nowrap">
                               <div className="text-center">SEGURSAT</div>
                             </td>
@@ -67,6 +88,7 @@ const EventPage = () => {
                               <div className="text-center">13/12/2021 04:56 am</div>
                             </td>
                           </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
