@@ -1,6 +1,6 @@
 const Breadcrumb = ({title}) => {
   return (
-    <nav className="flex bg-neutral-50 text-blue-700 border border-neutral-200 py-3 px-5 rounded-lg mb-4" aria-label="Breadcrumb">
+    <nav className="flex bg-neutral-50 text-blue-700 py-3 px-7 mb-4 pt-28" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <a href="/" className="text-neutral-700 hover:text-blue-900 text-sm inline-flex items-center font-medium">
