@@ -72,7 +72,6 @@ const EventTable = () => {
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                              {isLoading && <h1>Cargando</h1>}
                               {events.map((event) => (
                                 <tr key={event.id}>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.provider}</td>
@@ -86,6 +85,7 @@ const EventTable = () => {
                               ))}
                             </tbody>
                           </table>
+                          {isLoading && <h1>Cargando</h1>}
                         </div>
                       </div>
                     </div>
