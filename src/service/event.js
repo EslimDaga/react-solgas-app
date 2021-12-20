@@ -11,3 +11,13 @@ export const getEvents = async() => {
   });
   return response.data;
 }
+
+export const getEventById = async(id) => {
+  const token = cache.getItem("user").token;
+  const response = await axios.get(`${api}/control/web/api/get-event/${id}/`,{
+    headers: {
+      "Authorization": `JWT ${token}`
+    }
+  });
+  return response.data;
+}
