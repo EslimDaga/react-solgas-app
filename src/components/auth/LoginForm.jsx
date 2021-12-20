@@ -56,6 +56,7 @@ const LoginForm = () => {
         </label>
         <input
           type="text"
+          autoComplete="username"
           name="username"
           className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.username ? " focus:border-2 border-rose-500 border-2 border-rose-500" : "")}
           style={{ transition: "all .15s ease" }}
@@ -76,6 +77,7 @@ const LoginForm = () => {
         </label>
         <input
           type={passwordShow ? "text" : "password"}
+          autoComplete="current-password"
           name="password"
           className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.password ? " focus:border-2 border-rose-500 border-2 border-rose-500" : "")}
           style={{ transition: "all .15s ease" }}
