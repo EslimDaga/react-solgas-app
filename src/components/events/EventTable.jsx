@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getEvents } from "../../service/event";
+import { getEvents, getEventById } from "../../service/event";
 import { SearchCircleIcon } from "@heroicons/react/solid";
 import "../../assets/styles/css/events/style.css";
 
@@ -8,6 +8,8 @@ const EventTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [search, setSearch] = useState("");
   const [events, setEvents] = useState([]);
+  const [event, setEvent] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getEvents().then(events => {
@@ -44,8 +46,152 @@ const EventTable = () => {
     setSearch(target.value);
   }
 
+  const openModal = (id,state) => {
+    getEventById(id).then(event => {
+      setEvent(event);
+      console.log(event);
+      setShowModal(state);
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+
   return (
   <>
+    {showModal ? (
+      <>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 className="text-1xl font-semibold self-center">
+                  Detalles del Evento
+                </h3>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={() => setShowModal(false)}
+                >
+                  <span className="bg-transparent text-gray-900 h-6 w-6 text-xl block outline-none focus:outline-none">
+                    x
+                  </span>
+                </button>
+              </div>
+              <div className="relative p-5 flex-auto">
+                <div className="w-full bg-gray-100 flex">
+                  <div className="bg-white rounded-lg shadow-sm">
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-md shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Operador Logistico</p>
+                            <p className="text-white font-bold">{event.logistic_operator}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Placa</p>
+                            <p className="text-white font-bold">{event.unitid}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Tipo de Servicio</p>
+                            <p className="text-white font-bold">{event.type_of_service}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Checkpoint</p>
+                            <p className="text-white font-bold">{event.checkpoint}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Conductor</p>
+                            <p className="text-white font-bold">{event.driver_fullname}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Fecha de Creación</p>
+                            <p className="text-white font-bold">{event.datetime}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Puntaje</p>
+                            <p className="text-white font-bold">{event.game_score}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col mt-5 gap-7 text-sm">
+                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
+                          </svg>
+                          <div>
+                            <p className="text-white font-bold tracking-wider">Estado de Ruta</p>
+                            <p className="text-white font-bold">{event.route_status}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </>
+    ) : null}
     <div className="bg-white">
       <div className="pt-1">
         <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
@@ -136,19 +282,29 @@ const EventTable = () => {
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.driver_fullname}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.datetime}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
-                                    <div class="dropdown inline-block relative">
-                                      <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                                        <span class="mr-1">Acción</span>
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <div className="dropdown inline-block relative">
+                                      <button className="bg-blue-900 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                                        <span className="mr-1">Acción</span>
+                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                                         </svg>
                                       </button>
-                                      <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
-                                        <li class="">
-                                          <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/">Detalles</a>
+                                      <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
+                                        <li className="">
+                                          <button
+                                            className="rounded-t font-bold bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                            onClick={() => openModal(event.id,true)}
+                                          >
+                                          Detalles&nbsp;&nbsp;
+                                          </button>
                                         </li>
-                                        <li class="">
-                                          <a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/">Imágenes</a>
+                                        <li className="">
+                                          <button
+                                            className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                                            href="/"
+                                          >
+                                          Imágenes
+                                          </button>
                                         </li>
                                       </ul>
                                     </div>
