@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../../service/event";
-import { SearchCircleIcon } from "@heroicons/react/solid"
+import { SearchCircleIcon } from "@heroicons/react/solid";
+import "../../assets/styles/css/events/style.css";
 
 const EventTable = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -115,6 +116,12 @@ const EventTable = () => {
                                 >
                                   Fecha de Creación
                                 </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                                >
+                                  Ver detalles
+                                </th>
                               </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -128,6 +135,24 @@ const EventTable = () => {
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.checkpoint}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.driver_fullname}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.datetime}</td>
+                                  <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+                                    <div class="dropdown inline-block relative">
+                                      <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                                        <span class="mr-1">Acción</span>
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                        </svg>
+                                      </button>
+                                      <ul class="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
+                                        <li class="">
+                                          <a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/">Detalles</a>
+                                        </li>
+                                        <li class="">
+                                          <a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/">Imágenes</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
                                 </tr>
                               )) :
                                 <tr>
