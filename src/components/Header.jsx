@@ -24,9 +24,9 @@ export default function Example() {
               <Link to="/events" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Eventos
               </Link>
-              <a href="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
+              <Link to="/history" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Historial
-              </a>
+              </Link>
               <a href="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Checkpoint
               </a>
@@ -71,12 +71,12 @@ export default function Example() {
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                <Link to="/events" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Eventos
-                </a>
-                <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                </Link>
+                <Link to="/history" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Historial
-                </a>
+                </Link>
                 <a href="/" className="text-base font-medium text-gray-900 hover:text-gray-700">
                   Checkpoint
                 </a>
@@ -90,7 +90,7 @@ export default function Example() {
               <div>
                 <a
                   href="/"
-                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                  className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-900"
                 >
                   <LogoutIcon className="w-5 h-5 mr-2"/>Cerrar Sesión
                 </a>
