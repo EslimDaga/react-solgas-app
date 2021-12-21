@@ -19,7 +19,6 @@ const HistoryPage = () => {
     console.log(data);
   }
 
-
   return (
   <>
     <Header/>
@@ -73,6 +72,25 @@ const HistoryPage = () => {
                         })}
                       />
                       {errors.final_date && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.final_date.message}</span>}
+                    </div>
+                  </div>
+                  <div className="relative w-full">
+                    <label
+                      className={`block text-gray-700 text-base font-bold mb-2 ml-2` + (errors.unit_name ? " text-red-500" : "")}
+                    >
+                      Unidades
+                    </label>
+                    <div className="relative ml-2">
+                      <select
+                        className="bg-gray-100 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                        {...register("unit_name")}
+                        placeholder="Buscar por Unidad"
+                      >
+                          <option value="female">female</option>
+                          <option value="male">male</option>
+                          <option value="other">other</option>
+                      </select>
+                      {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.unit_name.message}</span>}
                     </div>
                   </div>
                   <div className={`text-center self-end ml-2 mb-1` + (errors.initial_date || errors.final_date ? " self-center mt-3": "")}>
