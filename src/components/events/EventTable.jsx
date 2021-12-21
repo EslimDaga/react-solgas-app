@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getEvents, getEventById } from "../../service/event";
+import { api } from "../../constants/global";
 import { SearchCircleIcon, BadgeCheckIcon } from "@heroicons/react/solid";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/events/style.css";
 
 const EventTable = () => {
@@ -10,6 +13,7 @@ const EventTable = () => {
   const [events, setEvents] = useState([]);
   const [event, setEvent] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showModalImages, setShowModalImages] = useState(false);
 
   useEffect(() => {
     getEvents().then(events => {
@@ -22,9 +26,7 @@ const EventTable = () => {
     if(search.length === 0){
       return events.slice(currentPage, currentPage + 10);
     }
-    //If there is something in the text box
     const filtered = events.filter(eve => eve.unitid.toLowerCase().includes(search));
-    //console.log(filtered);
     return filtered.slice(currentPage, currentPage + 10);
   }
 
@@ -51,6 +53,15 @@ const EventTable = () => {
       setEvent(event);
       console.log(event);
       setShowModal(state);
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+
+  const openModalImages = (id,state) => {
+    getEventById(id).then(event => {
+      setEvent(event);
+      setShowModalImages(state);
     }).catch(e => {
       console.log(e);
     })
@@ -176,6 +187,82 @@ const EventTable = () => {
         <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
       </>
     ) : null}
+    {showModalImages ? (
+      <>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <h3 className="text-1xl font-semibold self-center">
+                  Imagenes del Evento
+                </h3>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={() => setShowModalImages(false)}
+                >
+                  <span className="bg-transparent text-gray-900 h-6 w-6 text-xl block outline-none focus:outline-none">
+                    x
+                  </span>
+                </button>
+              </div>
+              <div className="relative p-5 flex-auto">
+                <div className="w-full bg-gray-100 flex">
+                  <div className="bg-white rounded-lg shadow-sm">
+                    <Carousel autoPlay width={500} dynamicHeight={20} thumbWidth={35}>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url1} alt={api + JSON.parse(event.images).url1}/>
+                        <p className="legend">Selfie del Conductor</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url2} alt={api + JSON.parse(event.images).url2}/>
+                        <p className="legend">Extintor</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url3} alt={api + JSON.parse(event.images).url3}/>
+                        <p className="legend">Delantero Izquierdo</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url4} alt={api + JSON.parse(event.images).url4}/>
+                        <p className="legend">Delantero Derecho</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url5} alt={api + JSON.parse(event.images).url5}/>
+                        <p className="legend">Posterior Izquiera</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url6} alt={api + JSON.parse(event.images).url6}/>
+                        <p className="legend">Posterior Derecha</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url7} alt={api + JSON.parse(event.images).url7}/>
+                        <p className="legend">Toma frontal de la unidad</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url8} alt={api + JSON.parse(event.images).url8}/>
+                        <p className="legend">Toma posterior de la unidad</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url9} alt={api + JSON.parse(event.images).url9}/>
+                        <p className="legend">Luces delanteras</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url10} alt={api + JSON.parse(event.images).url10}/>
+                        <p className="legend">Luces posteriores</p>
+                      </div>
+                      <div>
+                        <img src={api + JSON.parse(event.images).url11} alt={api + JSON.parse(event.images).url11}/>
+                        <p className="legend">Valvula interna</p>
+                      </div>
+                    </Carousel>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </>
+    ) : null}
     <div className="bg-white">
       <div className="pt-1">
         <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
@@ -285,7 +372,7 @@ const EventTable = () => {
                                         <li className="">
                                           <button
                                             className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                                            href="/"
+                                            onClick={() => openModalImages(event.id,true)}
                                           >
                                           Imágenes
                                           </button>
