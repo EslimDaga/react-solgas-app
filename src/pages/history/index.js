@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
-import { getUnits } from "../../service/history";
+import { getUnits, getSearchEvents } from "../../service/history";
 import { useForm } from "react-hook-form";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/common/Breadcrumb";
 
 const HistoryPage = () => {
   const { register, handleSubmit, formState : {errors} } = useForm();
-  const [allUnits, setAllUnits] = useState([]);
+  const [ allUnits, setAllUnits ] = useState([]);
+  const [ searchEvents, setSearchEvents ] = useState([]);
 
   useEffect(() => {
     getUnits().then(units => {
       setAllUnits(allUnits);
-      console.log(units);
     });
   },[]);
 
-  const onSubmitForm = (data) => {
-    console.log(data);
+  const onSubmitForm = async(data) => {
+    const { initial_date, final_date, unit_name } = data;
+    await getSearchEvents(initial_date,final_date,unit_name).then(events => {
+      setSearchEvents(events);
+    })
   }
 
   return (
@@ -86,9 +89,10 @@ const HistoryPage = () => {
                         {...register("unit_name")}
                         placeholder="Buscar por Unidad"
                       >
-                          <option value="female">female</option>
-                          <option value="male">male</option>
-                          <option value="other">other</option>
+                          <option value="ALL">Todos</option>t
+                          <option value="F4O-995">F4O-995</option>
+                          <option value="V4M-986">V4M-986</option>
+                          <option value="P3M-819">P3M-819</option>
                       </select>
                       {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.unit_name.message}</span>}
                     </div>
@@ -106,6 +110,11 @@ const HistoryPage = () => {
                   </div>
                 </form>
               </div>
+              {
+                searchEvents.map(event => (
+                  <h1 key={event.id}>{event.id}</h1>
+                ))
+              }
             </div>
           </section>
         </div>
