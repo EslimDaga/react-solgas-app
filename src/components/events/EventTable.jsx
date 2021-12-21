@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEvents, getEventById } from "../../service/event";
-import { SearchCircleIcon } from "@heroicons/react/solid";
+import { SearchCircleIcon, BadgeCheckIcon } from "@heroicons/react/solid";
 import "../../assets/styles/css/events/style.css";
 
 const EventTable = () => {
@@ -80,11 +80,9 @@ const EventTable = () => {
                 <div className="w-full bg-gray-100 flex">
                   <div className="bg-white rounded-lg shadow-sm">
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-md shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Operador Logistico</p>
                             <p className="text-white font-bold">{event.logistic_operator}</p>
@@ -93,11 +91,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Placa</p>
                             <p className="text-white font-bold">{event.unitid}</p>
@@ -106,11 +102,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Tipo de Servicio</p>
                             <p className="text-white font-bold">{event.type_of_service}</p>
@@ -119,11 +113,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Checkpoint</p>
                             <p className="text-white font-bold">{event.checkpoint}</p>
@@ -132,11 +124,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Conductor</p>
                             <p className="text-white font-bold">{event.driver_fullname}</p>
@@ -145,11 +135,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Fecha de Creación</p>
                             <p className="text-white font-bold">{event.datetime}</p>
@@ -158,11 +146,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Puntaje</p>
                             <p className="text-white font-bold">{event.game_score}</p>
@@ -171,11 +157,9 @@ const EventTable = () => {
                       </div>
                     </div>
                     <div className="flex flex-col mt-5 gap-7 text-sm">
-                      <div className="bg-blue-500 flex justify-between items-center p-3 rounded-sm shadow-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
                         <div className="flex justify-start items-center gap-2">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clipRule="evenodd"></path>
-                          </svg>
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500"/>
                           <div>
                             <p className="text-white font-bold tracking-wider">Estado de Ruta</p>
                             <p className="text-white font-bold">{event.route_status}</p>
