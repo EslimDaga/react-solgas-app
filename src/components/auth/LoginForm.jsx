@@ -1,8 +1,9 @@
-import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
-import { useState } from "react"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { login } from "../../service/auth";
+import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 
 const LoginForm = () => {
 
@@ -10,6 +11,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
 
   const { register, handleSubmit, formState : { errors }} = useForm();
+  const navigate = useNavigate();
 
   const onSubmitForm = async (data) => {
     setLoading(true);
@@ -18,7 +20,7 @@ const LoginForm = () => {
         className: "font-bold",
         style: { fontFamily: 'Quicksand' },
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -26,6 +28,9 @@ const LoginForm = () => {
         progress: undefined,
       });
       setLoading(false);
+      setTimeout(() => {
+        navigate("/events");
+      } , 3000);
     }).catch(err => {
       toast.error("😟 Datos invalidos", {
         className: "font-bold",
@@ -58,7 +63,7 @@ const LoginForm = () => {
           type="text"
           autoComplete="username"
           name="username"
-          className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.username ? " focus:border-2 border-rose-500 border-2 border-rose-500" : "")}
+          className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.username ? " focus:border-2 border-rose-500 border-2" : "")}
           style={{ transition: "all .15s ease" }}
           {...register("username", {
             required: {
@@ -79,7 +84,7 @@ const LoginForm = () => {
           type={passwordShow ? "text" : "password"}
           autoComplete="current-password"
           name="password"
-          className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.password ? " focus:border-2 border-rose-500 border-2 border-rose-500" : "")}
+          className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-base shadow focus:outline-none focus:ring w-full font-bold` + (errors.password ? " focus:border-2 border-rose-500 border-2" : "")}
           style={{ transition: "all .15s ease" }}
           {...register("password", {
             required: {
