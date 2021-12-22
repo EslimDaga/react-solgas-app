@@ -11,7 +11,7 @@ const HistoryPage = () => {
 
   useEffect(() => {
     getUnits().then(units => {
-      setAllUnits(allUnits);
+      setAllUnits(units);
     });
   },[]);
 
@@ -32,8 +32,8 @@ const HistoryPage = () => {
           <section className="antialiased text-gray-600 w-full">
             <div className="flex flex-col justify-center">
               <div className="items-center pb-3 sm:relative lg:flex">
-                <form onSubmit={handleSubmit(onSubmitForm)} className="flex">
-                  <div className="relative w-full">
+                <form onSubmit={handleSubmit(onSubmitForm)} className="mx-1 lg:flex">
+                  <div className="relative w-full md:w-full">
                     <label
                       className={`block text-gray-700 text-base font-bold mb-2 ml-1` + (errors.initial_date ? " text-red-500" : "")}
                     >
@@ -42,7 +42,7 @@ const HistoryPage = () => {
                     <div className="relative">
                       <input
                         type="date"
-                        className={`bg-gray-100 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.initial_date ? " focus:border-2 border-rose-500 border-2" : "")}
+                        className={`bg-gray-200 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.initial_date ? " focus:border-2 border-rose-500 border-2" : "")}
                         placeholder="Buscar por Unidad"
                         name="initial_date"
                         {...register("initial_date", {
@@ -55,7 +55,7 @@ const HistoryPage = () => {
                       {errors.initial_date && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.initial_date.message}</span>}
                     </div>
                   </div>
-                  <div className="relative w-full">
+                  <div className="relative w-full md:w-full">
                     <label
                       className={`block text-gray-700 text-base font-bold mb-2 ml-2` + (errors.initial_date ? " text-red-500" : "")}
                     >
@@ -64,7 +64,7 @@ const HistoryPage = () => {
                     <div className="relative ml-2">
                       <input
                         type="date"
-                        className={`bg-gray-100 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.final_date ? " focus:border-2 border-rose-500 border-2" : "")}
+                        className={`bg-gray-200 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.final_date ? " focus:border-2 border-rose-500 border-2" : "")}
                         placeholder="Buscar por Unidad"
                         name="final_date"
                         {...register("final_date", {
@@ -77,7 +77,7 @@ const HistoryPage = () => {
                       {errors.final_date && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.final_date.message}</span>}
                     </div>
                   </div>
-                  <div className="relative w-full">
+                  <div className="relative w-full md:w-full">
                     <label
                       className={`block text-gray-700 text-base font-bold mb-2 ml-2` + (errors.unit_name ? " text-red-500" : "")}
                     >
