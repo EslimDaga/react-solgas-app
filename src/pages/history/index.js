@@ -4,10 +4,14 @@ import { useForm, Controller } from "react-hook-form";
 import ReactSelect from "react-select";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/common/Breadcrumb";
+import ReactDatePicker from "react-datepicker";
+import moment from "moment";
+import "react-datepicker/dist/react-datepicker.css";
 import "../../assets/styles/css/history/style.css";
 
 
 const HistoryPage = () => {
+  const [startDate, setStartDate] = useState(new Date());
   const { register, handleSubmit, formState : {errors}, control } = useForm();
   const [ allUnits, setAllUnits ] = useState([]);
   const [ searchEvents, setSearchEvents ] = useState([]);
@@ -28,10 +32,11 @@ const HistoryPage = () => {
   },[]);
 
   const onSubmitForm = async(data) => {
+    console.log(moment(data.initial_date).format("YYYY-MM-DD"));
     const unit_name_value = data.unit_name.value;
-    console.log(unit_name_value);
-    const { initial_date, final_date } = data;
-    await getSearchEvents(initial_date,final_date,unit_name_value).then(events => {
+    const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
+    const final_date_value = moment(data.final_date).format("YYYY-MM-DD");
+    await getSearchEvents(initial_date_value,final_date_value,unit_name_value).then(events => {
       setSearchEvents(events);
     })
   }
@@ -48,58 +53,65 @@ const HistoryPage = () => {
               <div className="items-center pb-3 sm:relative lg:flex">
                 <form onSubmit={handleSubmit(onSubmitForm)} className="mx-1 lg:flex">
                   <div className="relative w-full md:w-full">
-                    <label
-                      className={`block text-gray-700 text-base font-bold mb-2 ml-1` + (errors.initial_date ? " text-red-500" : "")}
-                    >
+                    <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
                       Fecha Inicial
                     </label>
                     <div className="relative">
-                      <input
-                        type="date"
-                        className={`bg-gray-200 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.initial_date ? " focus:border-2 border-rose-500 border-2" : "")}
-                        placeholder="Buscar por Unidad"
+                      <Controller
+                        as={ReactDatePicker}
+                        control={control}
+                        valueName="selected"
+                        onChange={([selected]) => selected}
                         name="initial_date"
-                        {...register("initial_date", {
-                          required: {
-                            value: true,
-                            message: "Este campo es requerido"
-                          }
-                        })}
+                        className="input"
+                        rules={{
+                          required: true,
+                        }}
+                        render={({field}) => (
+                          <ReactDatePicker
+                            className="bg-gray-200 h-14 w-full pl-5 mr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                            selected={field.value}
+                            //onChange={(date) => setStartDate(date)}
+                            onChange={(date) => field.onChange(date)}
+                            placeholderText="Seleccionar Fecha Inicial"
+                          />
+                        )}
                       />
-                      {errors.initial_date && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.initial_date.message}</span>}
+                      {errors.initial_date && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
                   <div className="relative w-full md:w-full">
-                    <label
-                      className={`block text-gray-700 text-base font-bold mb-2 ml-2` + (errors.initial_date ? " text-red-500" : "")}
-                    >
+                    <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
                       Fecha Final
                     </label>
                     <div className="relative ml-2">
-                      <input
-                        type="date"
-                        className={`bg-gray-200 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold` + (errors.final_date ? " focus:border-2 border-rose-500 border-2" : "")}
-                        placeholder="Buscar por Unidad"
+                      <Controller
+                        control={control}
+                        valueName="selected"
+                        onChange={([selected]) => selected}
                         name="final_date"
-                        {...register("final_date", {
-                          required: {
-                            value: true,
-                            message: "Este campo es requerido"
-                          }
-                        })}
+                        className="input"
+                        rules={{
+                          required: true,
+                        }}
+                        render={({field}) => (
+                          <ReactDatePicker
+                            className="bg-gray-200 h-14 w-full pl-5 mr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                            selected={field.value}
+                            onChange={(date) => field.onChange(date)}
+                            placeholderText="Seleccionar Fecha Final"
+                          />
+                        )}
                       />
-                      {errors.final_date && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.final_date.message}</span>}
+                      {errors.final_date && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
                   <div className="relative w-full md:w-full">
-                    <label
-                      className={`block text-gray-700 text-base font-bold mb-2 ml-2` + (errors.unit_name ? " text-red-500" : "")}
-                    >
+                    <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
                       Unidades
                     </label>
                     <div className="relative ml-2">
                       <Controller
-                        as={ReactSelect}
                         name="unit_name"
                         isClearable
                         rules={{
@@ -120,7 +132,7 @@ const HistoryPage = () => {
                       {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
-                  <div className={`text-center self-end ml-2 mb-1` + (errors.initial_date || errors.final_date ? " self-center mt-3": "")}>
+                  <div className={`text-center self-center ml-2 mt-8` + (errors.initial_date || errors.final_date || errors.unit_name ? " self-center mt-2": "")}>
                     <button
                       className={`bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full` + (errors.initial_date || errors.final_date ? " opacity-50 cursor-not-allowed" : "")}
                       type="submit"
