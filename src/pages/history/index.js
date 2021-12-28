@@ -36,7 +36,7 @@ const HistoryPage = () => {
     if(search.length === 0){
       return searchEvents.slice(currentPage, currentPage + 10);
     }
-    const filtered = searchEvents.filter(eve => eve.unitid.toLowerCase().includes(search));
+    const filtered = searchEvents.filter(eve => eve.driver_fullname.toLowerCase().includes(search));
     return filtered.slice(currentPage, currentPage + 10);
   }
 
@@ -78,7 +78,7 @@ const HistoryPage = () => {
             <div className="flex flex-col justify-center">
               <div className="items-center pb-3 sm:relative lg:flex justify-between">
                 <form onSubmit={handleSubmit(onSubmitForm)} className="mx-1 lg:flex">
-                  <div className="relative w-full md:w-full">
+                  <div className="relative w-full md:w-full sm:mb-2">
                     <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
                       Fecha Inicial
                     </label>
@@ -95,22 +95,22 @@ const HistoryPage = () => {
                         }}
                         render={({field}) => (
                           <ReactDatePicker
-                            className="bg-gray-200 h-14 w-full pl-5 mr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                            className="bg-gray-200 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                             selected={field.value}
                             //onChange={(date) => setStartDate(date)}
                             onChange={(date) => field.onChange(date)}
-                            placeholderText="Seleccionar Fecha Inicial"
+                            placeholderText="Seleccionar Fecha"
                           />
                         )}
                       />
                       {errors.initial_date && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
-                  <div className="relative w-full md:w-full">
-                    <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
+                  <div className="relative w-full md:w-full sm:mb-2">
+                    <label className="block text-gray-700 text-base font-bold mb-2 lg:ml-2">
                       Fecha Final
                     </label>
-                    <div className="relative ml-2">
+                    <div className="relative lg:ml-2">
                       <Controller
                         control={control}
                         valueName="selected"
@@ -122,10 +122,10 @@ const HistoryPage = () => {
                         }}
                         render={({field}) => (
                           <ReactDatePicker
-                            className="bg-gray-200 h-14 w-full pl-5 mr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                            className="bg-gray-200 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                             selected={field.value}
                             onChange={(date) => field.onChange(date)}
-                            placeholderText="Seleccionar Fecha Final"
+                            placeholderText="Seleccionar Fecha"
                           />
                         )}
                       />
@@ -133,10 +133,10 @@ const HistoryPage = () => {
                     </div>
                   </div>
                   <div className="relative w-full md:w-full">
-                    <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
+                    <label className="block text-gray-700 text-base font-bold mb-2 lg:ml-2">
                       Unidades
                     </label>
-                    <div className="relative ml-2">
+                    <div className="relative lg:ml-2">
                       <Controller
                         name="unit_name"
                         isClearable
@@ -149,7 +149,7 @@ const HistoryPage = () => {
                           <ReactSelect
                             {...field}
                             isClearable
-                            placeholder="Buscar por Unidad"
+                            placeholder="Buscar Unidad"
                             className="bg-gray-200 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                             options={allUnits}
                           />
@@ -158,9 +158,9 @@ const HistoryPage = () => {
                       {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
-                  <div className={`text-center self-center ml-2 mt-8` + (errors.initial_date || errors.final_date || errors.unit_name ? " self-center mt-2": "")}>
+                  <div className={`text-center self-center lg:ml-2 sm:mt-4 lg:mt-8` + (errors.initial_date || errors.final_date || errors.unit_name ? " self-center lg:mt-2": "")}>
                     <button
-                      className={`bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full` + (errors.initial_date || errors.final_date ? " opacity-50 cursor-not-allowed" : "")}
+                      className={`bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full` + (errors.initial_date || errors.final_date || errors.unit_name ? " opacity-50 cursor-not-allowed" : "")}
                       type="submit"
                       style={{ transition: "all .15s ease" }}
                     >
@@ -180,7 +180,7 @@ const HistoryPage = () => {
                     </div>
                     <input
                       type="text"
-                      className="bg-gray-100 h-14 w-50 pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                      className="bg-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                       placeholder="Buscar..."
                       value={search}
                       onChange={onSearchChange}
@@ -190,7 +190,7 @@ const HistoryPage = () => {
               </div>
               <div className="bg-white">
                 <div className="pt-1">
-                  <div className="mx-auto flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-0">
+                  <div className="mx-auto flex items-center space-x-2 sm:px-3 lg:max-w-full lg:px-0">
                     <section className="antialiased text-gray-600 w-full">
                       <div className="flex flex-col justify-center">
                         <div className="w-full mx-auto bg-white rounded-lg">
