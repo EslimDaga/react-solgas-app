@@ -1,23 +1,37 @@
 import { useEffect, useState } from "react";
 import { getUnits, getSearchEvents } from "../../service/history";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import ReactSelect from "react-select";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/common/Breadcrumb";
+import "../../assets/styles/css/history/style.css";
+
 
 const HistoryPage = () => {
-  const { register, handleSubmit, formState : {errors} } = useForm();
+  const { register, handleSubmit, formState : {errors}, control } = useForm();
   const [ allUnits, setAllUnits ] = useState([]);
   const [ searchEvents, setSearchEvents ] = useState([]);
 
+
   useEffect(() => {
     getUnits().then(units => {
-      setAllUnits(units);
+      const optionAllUnits = [{ value: "ALL", label: "Todos" }];
+      const optionsUnits = units.map(unit => (
+        {
+          value: unit.license_plate,
+          label: unit.license_plate
+        }
+      ));
+      const total = optionAllUnits.concat(optionsUnits);
+      setAllUnits(total);
     });
   },[]);
 
   const onSubmitForm = async(data) => {
-    const { initial_date, final_date, unit_name } = data;
-    await getSearchEvents(initial_date,final_date,unit_name).then(events => {
+    const unit_name_value = data.unit_name.value;
+    console.log(unit_name_value);
+    const { initial_date, final_date } = data;
+    await getSearchEvents(initial_date,final_date,unit_name_value).then(events => {
       setSearchEvents(events);
     })
   }
@@ -84,17 +98,26 @@ const HistoryPage = () => {
                       Unidades
                     </label>
                     <div className="relative ml-2">
-                      <select
-                        className="bg-gray-100 h-14 w-full pl-5 pr-5 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-                        {...register("unit_name")}
-                        placeholder="Buscar por Unidad"
-                      >
-                          <option value="ALL">Todos</option>t
-                          <option value="F4O-995">F4O-995</option>
-                          <option value="V4M-986">V4M-986</option>
-                          <option value="P3M-819">P3M-819</option>
-                      </select>
-                      {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">{errors.unit_name.message}</span>}
+                      <Controller
+                        as={ReactSelect}
+                        name="unit_name"
+                        isClearable
+                        rules={{
+                          required: true,
+                          message: "Este campo es requerido"
+                        }}
+                        control={control}
+                        render={({field}) => (
+                          <ReactSelect
+                            {...field}
+                            isClearable
+                            placeholder="Buscar por Unidad"
+                            className="bg-gray-200 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                            options={allUnits}
+                          />
+                        )}
+                      />
+                      {errors.unit_name && <span className="text-red-500 text-sm font-bold flex mt-1">Este campo es requerido</span>}
                     </div>
                   </div>
                   <div className={`text-center self-end ml-2 mb-1` + (errors.initial_date || errors.final_date ? " self-center mt-3": "")}>
