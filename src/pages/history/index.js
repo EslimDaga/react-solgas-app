@@ -5,6 +5,7 @@ import ReactSelect from "react-select";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import ReactDatePicker from "react-datepicker";
+import { ToastContainer, toast } from "react-toastify";
 import moment from "moment";
 import { SearchCircleIcon } from "@heroicons/react/outline";
 import "react-datepicker/dist/react-datepicker.css";
@@ -62,6 +63,19 @@ const HistoryPage = () => {
     const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
     const final_date_value = moment(data.final_date).format("YYYY-MM-DD");
     await getSearchEvents(initial_date_value,final_date_value,unit_name_value).then(events => {
+      if(events.length === 0){
+        toast.error("🧐 No se hay resutados", {
+          className: "font-bold",
+          style: { fontFamily: 'Quicksand' },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
       setSearchEvents(events);
     })
   }
@@ -379,6 +393,7 @@ const HistoryPage = () => {
         </div>
       </div>
     </div>
+    <ToastContainer />
   </>
   )
 }
