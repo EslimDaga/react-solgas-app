@@ -37,12 +37,12 @@ export default function Example() {
                 Unidades
               </a>
             </Popover.Group>
-            <a
-              href="/"
+            <Link
+              to="/logout"
               className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-900"
             >
               <LogoutIcon className="w-5 h-5 mr-2"/>Cerrar Sesión
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -88,12 +88,12 @@ export default function Example() {
                 </a>
               </div>
               <div>
-                <a
-                  href="/"
+                <Link
+                  to="/logout"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-900"
                 >
                   <LogoutIcon className="w-5 h-5 mr-2"/>Cerrar Sesión
-                </a>
+                </Link>
               </div>
             </div>
           </div>
