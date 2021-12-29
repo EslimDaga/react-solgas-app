@@ -343,7 +343,7 @@ const EventTable = () => {
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                               {
-                              filteredEvents().length > 0 ? filteredEvents().map((event) => (
+                                filteredEvents().map((event) => (
                                 <tr key={event.id}>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.provider}</td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.logistic_operator}</td>
@@ -364,7 +364,6 @@ const EventTable = () => {
                                         <li className="">
                                           <button
                                             className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap"
-                                            onClick={() => openModal(event.id,true)}
                                           >
                                           Detalles
                                           </button>
@@ -372,7 +371,6 @@ const EventTable = () => {
                                         <li className="">
                                           <button
                                             className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-5 block whitespace-no-wrap"
-                                            onClick={() => openModalImages(event.id,true)}
                                           >
                                           Imágenes
                                           </button>
@@ -381,12 +379,54 @@ const EventTable = () => {
                                     </div>
                                   </td>
                                 </tr>
-                              )) :
-                                <tr>
-                                  <td colSpan="7" className="text-center p-2">
-                                    <h2 className="font-bold">No se encontraron resultados 😢</h2>
-                                  </td>
-                                </tr>
+                                ))
+                              }
+                              {
+                                search.length > 0 && filteredEvents().length === 0 && (
+                                  filteredEvents() > 1 ? filteredEvents().map((event) => (
+                                    <tr key={event.id}>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.provider}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.logistic_operator}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.unitid}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.type_of_service}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.checkpoint}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.driver_fullname}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">{event.datetime}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+                                        <div className="dropdown inline-block relative">
+                                          <button className="bg-blue-900 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
+                                            <span className="mr-1">Acción</span>
+                                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                            </svg>
+                                          </button>
+                                          <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
+                                            <li className="">
+                                              <button
+                                                className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap"
+                                              >
+                                              Detalles
+                                              </button>
+                                            </li>
+                                            <li className="">
+                                              <button
+                                                className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-5 block whitespace-no-wrap"
+                                              >
+                                              Imágenes
+                                              </button>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  )) : (
+                                  <tr>
+                                    <td colSpan="7" className="text-center p-2">
+                                      <h2 className="font-bold">No se encontraron resultados. 😢</h2>
+                                    </td>
+                                  </tr>
+                                  )
+                                )
                               }
                             </tbody>
                           </table>
