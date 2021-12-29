@@ -17,6 +17,7 @@ const HistoryPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [search, setSearch] = useState("");
   const [searchEvents, setSearchEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getUnits().then(units => {
@@ -41,7 +42,7 @@ const HistoryPage = () => {
   }
 
   const nextPage = () => {
-    if(searchEvents.filter(eve => eve.unitid.toLowerCase().includes(search)).length > currentPage + 10){
+    if(searchEvents.filter(eve => eve.driver_fullname.toLowerCase().includes(search)).length > currentPage + 10){
       setCurrentPage(currentPage + 10);
     }
   }
@@ -58,7 +59,7 @@ const HistoryPage = () => {
   }
 
   const onSubmitForm = async(data) => {
-    console.log(moment(data.initial_date).format("YYYY-MM-DD"));
+    setLoading(true);
     const unit_name_value = data.unit_name.value;
     const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
     const final_date_value = moment(data.final_date).format("YYYY-MM-DD");
@@ -77,6 +78,7 @@ const HistoryPage = () => {
         });
       }
       setSearchEvents(events);
+      setLoading(false);
     })
   }
 
@@ -354,11 +356,19 @@ const HistoryPage = () => {
                                         }
                                         {
                                           search.length === 0 && filteredEvents().length === 0 && (
+                                            !loading ? (
                                             <tr>
                                               <td colSpan="7" className="text-center p-2">
                                                 <h2 className="font-bold">Aún no hiciste una busqueda. 🤔</h2>
                                               </td>
                                             </tr>
+                                            ) : (
+                                            <tr>
+                                              <td colSpan="7" className="text-center p-10">
+                                                <h2 className="font-bold">Cargando... 🤗</h2>
+                                              </td>
+                                            </tr>
+                                            )
                                           )
                                         }
                                       </tbody>
