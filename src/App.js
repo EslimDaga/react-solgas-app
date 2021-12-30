@@ -5,13 +5,16 @@ import HistoryPage from "./pages/history";
 import NotFound from "./pages/404";
 import Logout from "./components/common/Logout";
 import PrivateRoute from "./components/common/PrivateRoute";
+import PublicRoute from "./components/common/PublicRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Navigate to="/login"/>} />
-        <Route exact path="/login" element={<AuthPage/>}/>
+        <Route element={<PublicRoute/>}>
+          <Route exact path="/" element={<Navigate to="/login"/>} />
+          <Route exact path="/login" element={<AuthPage/>}/>
+        </Route>
         <Route element={<PrivateRoute />}>
           <Route exact path="/events" element={<EventPage/>}/>
           <Route exact path="/history" element={<HistoryPage/>}/>
