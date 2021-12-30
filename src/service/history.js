@@ -19,6 +19,5 @@ export const getSearchEvents = async(initial_date,final_date,unit_name) => {
       "Authorization": `JWT ${token}`
     }
   });
-  console.log(response.data);
   return response.data;
 }
