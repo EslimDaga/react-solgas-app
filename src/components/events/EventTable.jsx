@@ -51,7 +51,6 @@ const EventTable = () => {
   const openModal = (id,state) => {
     getEventById(id).then(event => {
       setEvent(event);
-      console.log(event);
       setShowModal(state);
     }).catch(e => {
       console.log(e);
