@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { SearchCircleIcon } from "@heroicons/react/solid";
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import { getCheckpoints } from "../../service/checkpoint";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const CheckpointTable = () => {
 
@@ -119,30 +125,64 @@ const CheckpointTable = () => {
                                     {checkpoint.modified}
                                   </td>
                                   <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
-                                    <div className="dropdown inline-block relative">
-                                      <button className="bg-blue-900 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                        <span className="mr-1">Acción</span>
-                                        <svg
-                                          className="fill-current h-4 w-4"
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          viewBox="0 0 20 20"
-                                        >
-                                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                      </button>
-                                      <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
-                                        <li className="">
-                                          <button className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap">
-                                            Detalles
-                                          </button>
-                                        </li>
-                                        <li className="">
-                                          <button className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap">
-                                            Imágenes
-                                          </button>
-                                        </li>
-                                      </ul>
-                                    </div>
+                                    <Menu
+                                      as="div"
+                                      className="relative inline-block text-left"
+                                    >
+                                      <div>
+                                        <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                                          Acción
+                                          <ChevronDownIcon
+                                            className="-mr-1 ml-2 h-5 w-5"
+                                            aria-hidden="true"
+                                          />
+                                        </Menu.Button>
+                                      </div>
+                                      <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                      >
+                                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                          <div className="py-1">
+                                            <Menu.Item>
+                                              {({ active }) => (
+                                                <a
+                                                  href="/"
+                                                  className={classNames(
+                                                    active
+                                                      ? "bg-gray-100 text-gray-900"
+                                                      : "text-gray-700",
+                                                    "block px-4 py-2 text-sm"
+                                                  )}
+                                                >
+                                                  Editar
+                                                </a>
+                                              )}
+                                            </Menu.Item>
+                                            <Menu.Item>
+                                              {({ active }) => (
+                                                <a
+                                                  href="/"
+                                                  className={classNames(
+                                                    active
+                                                      ? "bg-gray-100 text-gray-900"
+                                                      : "text-gray-700",
+                                                    "block px-4 py-2 text-sm"
+                                                  )}
+                                                >
+                                                  Eliminar
+                                                </a>
+                                              )}
+                                            </Menu.Item>
+                                          </div>
+                                        </Menu.Items>
+                                      </Transition>
+                                    </Menu>
                                   </td>
                                 </tr>
                               ))}
