@@ -27,9 +27,9 @@ export default function Example() {
               <Link to="/history" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Historial
               </Link>
-              <a href="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
+              <Link to="/checkpoint" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Checkpoint
-              </a>
+              </Link>
               <a href="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Conductores
               </a>
