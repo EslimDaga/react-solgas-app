@@ -11,3 +11,13 @@ export const getCheckpoints = async () => {
   });
   return response.data;
 }
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      cache.removeItem("user");
+      window.location = "/login";
+    }
+  }
+);

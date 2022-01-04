@@ -12,6 +12,16 @@ export const getEvents = async() => {
   return response.data;
 }
 
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      cache.removeItem("user");
+      window.location = "/login";
+    }
+  }
+);
+
 export const getEventById = async(id) => {
   const token = cache.getItem("user").token;
   const response = await axios.get(`${api}/control/web/api/get-event/${id}/`,{
