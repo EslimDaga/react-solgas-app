@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getEvents, getEventById } from "../../service/event";
 import { api } from "../../constants/global";
-import { SearchCircleIcon, BadgeCheckIcon } from "@heroicons/react/solid";
+import { SearchCircleIcon, BadgeCheckIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/events/style.css";
+import { Menu, Transition } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const EventTable = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -225,7 +230,7 @@ const EventTable = () => {
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                <div className="flex items-start justify-between p-3 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-1xl font-semibold self-center">
                     Imagenes del Evento
                   </h3>
@@ -238,7 +243,7 @@ const EventTable = () => {
                     </span>
                   </button>
                 </div>
-                <div className="relative p-5 flex-auto">
+                <div className="relative flex-auto">
                   <div className="w-full bg-gray-100 flex">
                     <div className="bg-white rounded-lg shadow-sm">
                       <Carousel
@@ -437,40 +442,72 @@ const EventTable = () => {
                                       {event.datetime}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
-                                      <div className="dropdown inline-block relative">
-                                        <button className="bg-blue-900 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                          <span className="mr-1">Acción</span>
-                                          <svg
-                                            className="fill-current h-4 w-4"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                          >
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                          </svg>
-                                        </button>
-                                        <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
-                                          <li className="">
-                                            <button
-                                              className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap"
-                                              onClick={() =>
-                                                openModal(event.id, true)
-                                              }
-                                            >
-                                              Detalles
-                                            </button>
-                                          </li>
-                                          <li className="">
-                                            <button
-                                              className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap"
-                                              onClick={() =>
-                                                openModalImages(event.id, true)
-                                              }
-                                            >
-                                              Imágenes
-                                            </button>
-                                          </li>
-                                        </ul>
-                                      </div>
+                                      <Menu
+                                        as="div"
+                                        className="relative inline-block text-left"
+                                      >
+                                        <div>
+                                          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-900">
+                                            Acción
+                                            <ChevronDownIcon
+                                              className="-mr-1 ml-2 h-5 w-5"
+                                              aria-hidden="true"
+                                            />
+                                          </Menu.Button>
+                                        </div>
+                                        <Transition
+                                          as={Fragment}
+                                          enter="transition ease-out duration-100"
+                                          enterFrom="transform opacity-0 scale-95"
+                                          enterTo="transform opacity-100 scale-100"
+                                          leave="transition ease-in duration-75"
+                                          leaveFrom="transform opacity-100 scale-100"
+                                          leaveTo="transform opacity-0 scale-95"
+                                        >
+                                          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                            <div className="py-1">
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <button
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-gray-100 text-gray-900 w-full"
+                                                        : "text-gray-700",
+                                                      "block px-4 py-2 text-sm w-full"
+                                                    )}
+                                                    onClick={() =>
+                                                      openModal(event.id, true)
+                                                    }
+                                                  >
+                                                    Detalles
+                                                  </button>
+                                                )}
+                                              </Menu.Item>
+                                              <Menu.Item>
+                                                {({ active }) => (
+                                                  <button
+                                                    href="/"
+                                                    className={classNames(
+                                                      active
+                                                        ? "bg-gray-100 text-gray-900 w-full"
+                                                        : "text-gray-700",
+                                                      "block px-4 py-2 text-sm w-full"
+                                                    )}
+                                                    onClick={() =>
+                                                      openModalImages(
+                                                        event.id,
+                                                        true
+                                                      )
+                                                    }
+                                                  >
+                                                    Imagenes
+                                                  </button>
+                                                )}
+                                              </Menu.Item>
+                                            </div>
+                                          </Menu.Items>
+                                        </Transition>
+                                      </Menu>
                                     </td>
                                   </tr>
                                 ))}
