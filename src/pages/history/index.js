@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getUnits, getSearchEvents } from "../../service/history";
 import { useForm, Controller } from "react-hook-form";
 import ReactSelect from "react-select";
@@ -8,13 +8,18 @@ import ReactDatePicker from "react-datepicker";
 import { ToastContainer, toast } from "react-toastify";
 import { Carousel } from "react-responsive-carousel";
 import moment from "moment";
-import { SearchCircleIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/outline";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/history/style.css";
 import { BadgeCheckIcon } from "@heroicons/react/solid";
 import { getEventById } from "../../service/event";
 import { api } from "../../constants/global";
+import { Menu, Transition } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const HistoryPage = () => {
   const { handleSubmit, formState : {errors}, control } = useForm();
@@ -611,54 +616,84 @@ const HistoryPage = () => {
                                                 {event.datetime}
                                               </td>
                                               <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
-                                                <div className="dropdown inline-block relative">
-                                                  <button className="bg-blue-900 text-white font-semibold py-2 px-4 rounded inline-flex items-center">
-                                                    <span className="mr-1">
+                                                <Menu
+                                                  as="div"
+                                                  className="relative inline-block text-left"
+                                                >
+                                                  <div>
+                                                    <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-900">
                                                       Acción
-                                                    </span>
-                                                    <svg
-                                                      className="fill-current h-4 w-4"
-                                                      xmlns="http://www.w3.org/2000/svg"
-                                                      viewBox="0 0 20 20"
-                                                    >
-                                                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                                    </svg>
-                                                  </button>
-                                                  <ul className="dropdown-menu absolute hidden text-gray-700 pt-1 z-50">
-                                                    <li className="">
-                                                      <button
-                                                        className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-6 block whitespace-no-wrap"
-                                                        onClick={() =>
-                                                          openModal(
-                                                            event.id,
-                                                            true
-                                                          )
-                                                        }
-                                                      >
-                                                        Detalles
-                                                      </button>
-                                                    </li>
-                                                    <li className="">
-                                                      <button
-                                                        className="font-bold bg-gray-200 hover:bg-gray-400 py-2 px-5 block whitespace-no-wrap"
-                                                        onClick={() =>
-                                                          openModalImages(
-                                                            event.id,
-                                                            true
-                                                          )
-                                                        }
-                                                      >
-                                                        Imágenes
-                                                      </button>
-                                                    </li>
-                                                  </ul>
-                                                </div>
+                                                      <ChevronDownIcon
+                                                        className="-mr-1 ml-2 h-5 w-5"
+                                                        aria-hidden="true"
+                                                      />
+                                                    </Menu.Button>
+                                                  </div>
+                                                  <Transition
+                                                    as={Fragment}
+                                                    enter="transition ease-out duration-100"
+                                                    enterFrom="transform opacity-0 scale-95"
+                                                    enterTo="transform opacity-100 scale-100"
+                                                    leave="transition ease-in duration-75"
+                                                    leaveFrom="transform opacity-100 scale-100"
+                                                    leaveTo="transform opacity-0 scale-95"
+                                                  >
+                                                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                                      <div className="py-1">
+                                                        <Menu.Item>
+                                                          {({ active }) => (
+                                                            <button
+                                                              className={classNames(
+                                                                active
+                                                                  ? "bg-gray-100 text-gray-900 w-full"
+                                                                  : "text-gray-700",
+                                                                "block px-4 py-2 text-sm w-full"
+                                                              )}
+                                                              onClick={() =>
+                                                                openModal(
+                                                                  event.id,
+                                                                  true
+                                                                )
+                                                              }
+                                                            >
+                                                              Detalles
+                                                            </button>
+                                                          )}
+                                                        </Menu.Item>
+                                                        <Menu.Item>
+                                                          {({ active }) => (
+                                                            <button
+                                                              href="/"
+                                                              className={classNames(
+                                                                active
+                                                                  ? "bg-gray-100 text-gray-900 w-full"
+                                                                  : "text-gray-700",
+                                                                "block px-4 py-2 text-sm w-full"
+                                                              )}
+                                                              onClick={() =>
+                                                                openModalImages(
+                                                                  event.id,
+                                                                  true
+                                                                )
+                                                              }
+                                                            >
+                                                              Imagenes
+                                                            </button>
+                                                          )}
+                                                        </Menu.Item>
+                                                      </div>
+                                                    </Menu.Items>
+                                                  </Transition>
+                                                </Menu>
                                               </td>
                                             </tr>
                                           ))}
                                           {search.length > 0 ? (
                                             <tr>
-                                              <td colSpan="7" className="text-center p-2">
+                                              <td
+                                                colSpan="7"
+                                                className="text-center p-2"
+                                              >
                                                 <h2 className="font-bold">
                                                   No se encontraron resultados.
                                                   😢
@@ -670,7 +705,10 @@ const HistoryPage = () => {
                                             filteredEvents().length === 0 &&
                                             (!loading ? (
                                               <tr>
-                                                <td colSpan="7" className="text-center p-2">
+                                                <td
+                                                  colSpan="7"
+                                                  className="text-center p-2"
+                                                >
                                                   <h2 className="font-bold">
                                                     Aún no hiciste una busqueda.
                                                     🤔
@@ -679,13 +717,17 @@ const HistoryPage = () => {
                                               </tr>
                                             ) : (
                                               <tr>
-                                                <td colSpan="7" className="text-center p-10">
+                                                <td
+                                                  colSpan="7"
+                                                  className="text-center p-10"
+                                                >
                                                   <h2 className="font-bold">
                                                     Cargando... 🤗
                                                   </h2>
                                                 </td>
                                               </tr>
-                                            ))}
+                                            ))
+                                          }
                                         </tbody>
                                       </table>
                                     </div>
