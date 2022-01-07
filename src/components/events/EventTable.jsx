@@ -7,10 +7,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/events/style.css";
 import { Menu, Transition } from "@headlessui/react";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const EventTable = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -464,45 +460,30 @@ const EventTable = () => {
                                           leaveFrom="transform opacity-100 scale-100"
                                           leaveTo="transform opacity-0 scale-95"
                                         >
-                                          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
-                                            <div className="py-1">
+                                          <Menu.Items className="origin-top-right absolute right-0 mt-0 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                                            <div className="py-0">
                                               <Menu.Item>
-                                                {({ active }) => (
-                                                  <button
-                                                    className={classNames(
-                                                      active
-                                                        ? "bg-gray-100 text-gray-900 w-full"
-                                                        : "text-gray-700",
-                                                      "block px-4 py-2 text-sm w-full"
-                                                    )}
-                                                    onClick={() =>
-                                                      openModal(event.id, true)
-                                                    }
-                                                  >
-                                                    Detalles
-                                                  </button>
-                                                )}
+                                                <button
+                                                  className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                  onClick={() =>
+                                                    openModal(event.id, true)
+                                                  }
+                                                >
+                                                  Detalles
+                                                </button>
                                               </Menu.Item>
                                               <Menu.Item>
-                                                {({ active }) => (
-                                                  <button
-                                                    href="/"
-                                                    className={classNames(
-                                                      active
-                                                        ? "bg-gray-100 text-gray-900 w-full"
-                                                        : "text-gray-700",
-                                                      "block px-4 py-2 text-sm w-full"
-                                                    )}
-                                                    onClick={() =>
-                                                      openModalImages(
-                                                        event.id,
-                                                        true
-                                                      )
-                                                    }
-                                                  >
-                                                    Imagenes
-                                                  </button>
-                                                )}
+                                                <button
+                                                  className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                  onClick={() =>
+                                                    openModalImages(
+                                                      event.id,
+                                                      true
+                                                    )
+                                                  }
+                                                >
+                                                  Imágenes
+                                                </button>
                                               </Menu.Item>
                                             </div>
                                           </Menu.Items>
@@ -512,15 +493,15 @@ const EventTable = () => {
                                   </tr>
                                 ))}
                                 {search.length > 0 &&
-                                  filteredEvents().length === 0 ? (
-                                    <tr>
-                                      <td colSpan="7" className="text-center p-2">
-                                        <h2 className="font-bold">
-                                          No se encontraron resultados. 😢
-                                        </h2>
-                                      </td>
-                                    </tr>
-                                  ):null}
+                                filteredEvents().length === 0 ? (
+                                  <tr>
+                                    <td colSpan="7" className="text-center p-2">
+                                      <h2 className="font-bold">
+                                        No se encontraron resultados. 😢
+                                      </h2>
+                                    </td>
+                                  </tr>
+                                ) : null}
                               </tbody>
                             </table>
                             {isLoading && (
