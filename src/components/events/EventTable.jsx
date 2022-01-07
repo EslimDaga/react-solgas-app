@@ -6,6 +6,7 @@ import ModalImages from "../common/ModalImages";
 import { Menu, Transition } from "@headlessui/react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/events/style.css";
+import Pagination from "../common/Pagination";
 
 const EventTable = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -332,20 +333,7 @@ const EventTable = () => {
                   </div>
                 </div>
               </div>
-              <div className="mb-3">
-                <button
-                  className="bg-blue-900 text-white font-bold py-2 px-4 rounded mr-2"
-                  onClick={prevPage}
-                >
-                  Anterior
-                </button>
-                <button
-                  className="bg-blue-900 text-white font-bold py-2 px-4 rounded"
-                  onClick={nextPage}
-                >
-                  Siguiente
-                </button>
-              </div>
+              <Pagination prevPage={prevPage} nextPage={nextPage} />
             </section>
           </div>
         </div>
