@@ -3,7 +3,6 @@ import { PlusCircleIcon, SearchCircleIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { getCheckpoints } from "../../service/checkpoint";
-import { PlusIcon, UserAddIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
