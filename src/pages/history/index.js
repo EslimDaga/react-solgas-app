@@ -17,10 +17,6 @@ import { getEventById } from "../../service/event";
 import { api } from "../../constants/global";
 import { Menu, Transition } from "@headlessui/react";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const HistoryPage = () => {
   const { handleSubmit, formState : {errors}, control } = useForm();
   const [allUnits, setAllUnits] = useState([]);
@@ -138,122 +134,124 @@ const HistoryPage = () => {
                 <div className="relative p-5 flex-auto">
                   <div className="w-full bg-gray-100 flex">
                     <div className="bg-white rounded-lg shadow-sm">
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Operador Logistico
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.logistic_operator}
-                              </p>
+                      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Operador Logistico
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.logistic_operator}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Placa
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.unitid}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Placa
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.unitid}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Tipo de Servicio
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.type_of_service}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Tipo de Servicio
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.type_of_service}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Checkpoint
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.checkpoint}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Fecha de Creación
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.datetime}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Conductor
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.driver_fullname}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Puntaje
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.game_score}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Fecha de Creación
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.datetime}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Estado de Ruta
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.route_status}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Puntaje
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.game_score}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Conductor
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.driver_fullname}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col mt-5 gap-7 text-sm">
-                        <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
-                          <div className="flex justify-start items-center gap-2">
-                            <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
-                            <div>
-                              <p className="text-white font-bold tracking-wider">
-                                Estado de Ruta
-                              </p>
-                              <p className="text-white font-bold">
-                                {event.route_status}
-                              </p>
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                            <div className="flex justify-start items-center gap-2">
+                              <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                              <div>
+                                <p className="text-white font-bold tracking-wider">
+                                  Checkpoint
+                                </p>
+                                <p className="text-white font-bold">
+                                  {event.checkpoint}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -641,45 +639,30 @@ const HistoryPage = () => {
                                                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                                                       <div className="py-1">
                                                         <Menu.Item>
-                                                          {({ active }) => (
-                                                            <button
-                                                              className={classNames(
-                                                                active
-                                                                  ? "bg-gray-100 text-gray-900 w-full"
-                                                                  : "text-gray-700",
-                                                                "block px-4 py-2 text-sm w-full"
-                                                              )}
-                                                              onClick={() =>
-                                                                openModal(
-                                                                  event.id,
-                                                                  true
-                                                                )
-                                                              }
-                                                            >
-                                                              Detalles
-                                                            </button>
-                                                          )}
+                                                          <button
+                                                            className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                            onClick={() =>
+                                                              openModal(
+                                                                event.id,
+                                                                true
+                                                              )
+                                                            }
+                                                          >
+                                                            Detalles
+                                                          </button>
                                                         </Menu.Item>
                                                         <Menu.Item>
-                                                          {({ active }) => (
-                                                            <button
-                                                              href="/"
-                                                              className={classNames(
-                                                                active
-                                                                  ? "bg-gray-100 text-gray-900 w-full"
-                                                                  : "text-gray-700",
-                                                                "block px-4 py-2 text-sm w-full"
-                                                              )}
-                                                              onClick={() =>
-                                                                openModalImages(
-                                                                  event.id,
-                                                                  true
-                                                                )
-                                                              }
-                                                            >
-                                                              Imagenes
-                                                            </button>
-                                                          )}
+                                                          <button
+                                                            className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                            onClick={() =>
+                                                              openModalImages(
+                                                                event.id,
+                                                                true
+                                                              )
+                                                            }
+                                                          >
+                                                            Imágenes
+                                                          </button>
                                                         </Menu.Item>
                                                       </div>
                                                     </Menu.Items>
@@ -726,8 +709,7 @@ const HistoryPage = () => {
                                                   </h2>
                                                 </td>
                                               </tr>
-                                            ))
-                                          }
+                                            ))}
                                         </tbody>
                                       </table>
                                     </div>
