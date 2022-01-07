@@ -1,8 +1,9 @@
 import { useEffect, useState, Fragment } from "react";
-import { SearchCircleIcon } from "@heroicons/react/solid";
+import { PlusCircleIcon, SearchCircleIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { getCheckpoints } from "../../service/checkpoint";
+import { PlusIcon, UserAddIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -53,8 +54,8 @@ const CheckpointTable = () => {
         <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
           <section className="antialiased text-gray-600 w-full">
             <div className="flex flex-col justify-center">
-              <div className="items-center pb-3 sm:relative lg:flex">
-                <div className="relative">
+              <div className="items-center pb-3 flex sm:flex lg:flex justify-between">
+                <div className="relative w-1/2 sm:w-1/2 lg:w-auto">
                   <div className="absolute top-4 left-3">
                     <SearchCircleIcon className="h-6 w-6" />
                   </div>
@@ -66,6 +67,11 @@ const CheckpointTable = () => {
                     onChange={onSearchChange}
                   />
                 </div>
+
+                <button className="sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900">
+                  <PlusCircleIcon className="w-5 h-5 mr-2" />
+                  Agregar Checkpoint
+                </button>
               </div>
               <div className="w-full mx-auto bg-white rounded-lg">
                 <div className="lg:pr-3 sm:pr-1 lg:pl-3 sm:pl-1 pb-3">
