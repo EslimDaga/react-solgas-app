@@ -16,7 +16,6 @@ const CheckpointTable = () => {
 
   useEffect(() => {
     getCheckpoints().then(checkpoints => {
-      console.log(checkpoints);
       setCheckpoints(checkpoints);
     });
   },[]);
