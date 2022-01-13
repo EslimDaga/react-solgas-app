@@ -61,6 +61,10 @@ const EventTable = () => {
     })
   }
 
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
   const openModalImages = (id,state) => {
     getEventById(id).then(event => {
       setEvent(event);
@@ -68,6 +72,10 @@ const EventTable = () => {
     }).catch(e => {
       console.log(e);
     })
+  }
+
+  const closeModalImages = () => {
+    setShowModalImages(false);
   }
 
   return (
@@ -83,7 +91,7 @@ const EventTable = () => {
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
+                    onClick={closeModal}
                   >
                     <span className="bg-transparent text-gray-900 h-6 w-6 text-xl block outline-none focus:outline-none">
                       x
@@ -108,7 +116,7 @@ const EventTable = () => {
                   </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModalImages(false)}
+                    onClick={closeModalImages}
                   >
                     <span className="bg-transparent text-gray-900 h-6 w-6 text-xl block outline-none focus:outline-none">
                       x
@@ -285,9 +293,7 @@ const EventTable = () => {
                                 ) : null}
                               </tbody>
                             </table>
-                            {isLoading && (
-                              <LoadingDataInTable />
-                            )}
+                            {isLoading && <LoadingDataInTable />}
                           </div>
                         </div>
                       </div>
