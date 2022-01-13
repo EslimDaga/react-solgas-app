@@ -1,14 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
 import { getEvents, getEventById } from "../../service/event";
-import { SearchCircleIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import ModalDetails from "../common/ModalDetails";
 import ModalImages from "../common/ModalImages";
 import { Menu, Transition } from "@headlessui/react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "../../assets/styles/css/events/style.css";
 import Pagination from "../common/Pagination";
 import NoResultsFound from "../common/NoResultsFound";
 import LoadingDataInTable from "../common/LoadingDataInTable";
+import InputSearch from "../common/InputSearch";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "../../assets/styles/css/events/style.css";
 
 const EventTable = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,20 +92,7 @@ const EventTable = () => {
           <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
             <section className="antialiased text-gray-600 w-full">
               <div className="flex flex-col justify-center">
-                <div className="items-center pb-3 sm:relative lg:flex">
-                  <div className="relative">
-                    <div className="absolute top-4 left-3">
-                      <SearchCircleIcon className="h-6 w-6" />
-                    </div>
-                    <input
-                      type="text"
-                      className="bg-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-                      placeholder="Buscar por Unidad"
-                      value={search}
-                      onChange={onSearchChange}
-                    />
-                  </div>
-                </div>
+                <InputSearch search={search} onSearchChange={onSearchChange} />
                 <div className="w-full mx-auto bg-white rounded-lg">
                   <div className="lg:pr-3 sm:pr-1 lg:pl-3 sm:pl-1 pb-3">
                     <div className="flex flex-col">
