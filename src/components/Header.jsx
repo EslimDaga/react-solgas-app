@@ -2,9 +2,32 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { LogoHeader } from "./common/LogoHeader";
 import { MenuIcon, XIcon, LogoutIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { Global ,css } from "@emotion/react";
+import { render } from "@testing-library/react";
 
-export default function Example() {
+render(
+  <Global
+    styles={css`
+      .active {
+        background-color: #1E3A8A;
+        color: #FFF;
+      }&.active:hover {
+        color: #FFF;
+      }
+    `}
+  />
+);
+
+const navItems = [
+  {title : "Eventos", path : "events"},
+  {title : "Historial", path : "history"},
+  {title : "Checkpoint", path : "checkpoint"},
+  {title : "Conductores", path : "drivers"},
+  {title : "Unidades", path : "units"}
+]
+
+const Header = () => {
   return (
     <Popover className="bg-slate-50 p-2 mt-0 fixed w-full z-10 top-0">
       <div className="mx-auto px-4 sm:px-6">
@@ -20,37 +43,16 @@ export default function Example() {
             </Popover.Button>
           </div>
           <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Popover.Group as="nav" className="hidden md:flex space-x-10">
-              <Link
-                to="/events"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Eventos
-              </Link>
-              <Link
-                to="/history"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Historial
-              </Link>
-              <Link
-                to="/checkpoint"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Checkpoint
-              </Link>
-              <a
-                href="/"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Conductores
-              </a>
-              <a
-                href="/"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Unidades
-              </a>
+            <Popover.Group as="nav" className="hidden md:flex space-x-1">
+              {navItems.map((item) => (
+                <NavLink
+                  end
+                  to={`/${item.path}`}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900 px-2 py-2 rounded-md"
+                >
+                  {item.title}
+                </NavLink>
+              ))}
             </Popover.Group>
             <Link
               to="/logout"
@@ -137,3 +139,5 @@ export default function Example() {
     </Popover>
   );
 }
+
+export default Header;
