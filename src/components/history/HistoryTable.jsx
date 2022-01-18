@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import ReactDatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
 import ReactSelect from "react-select";
+import NoResultsFound from "../common/NoResultsFound";
 
 const HistoryTable = ({
   handleSubmit,
@@ -314,17 +315,9 @@ const HistoryTable = ({
                                             </td>
                                           </tr>
                                         ))}
-                                        {search.length > 1 ? (
-                                          <tr>
-                                            <td
-                                              colSpan="7"
-                                              className="text-center p-2"
-                                            >
-                                              <h2 className="font-bold">
-                                                No se encontraron resultados. 😢
-                                              </h2>
-                                            </td>
-                                          </tr>
+                                        {search.length > 0 &&
+                                        filteredEvents().length === 0 ? (
+                                          <NoResultsFound />
                                         ) : null}
                                         {search.length === 0 &&
                                           filteredEvents().length === 0 &&
