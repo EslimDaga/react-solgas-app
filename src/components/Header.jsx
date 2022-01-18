@@ -46,6 +46,7 @@ const Header = () => {
             <Popover.Group as="nav" className="hidden md:flex space-x-1">
               {navItems.map((item) => (
                 <NavLink
+                  key={item.path}
                   end
                   to={`/${item.path}`}
                   className="text-base font-medium text-gray-500 hover:text-gray-900 px-2 py-2 rounded-md"
