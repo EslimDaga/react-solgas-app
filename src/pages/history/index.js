@@ -1,23 +1,20 @@
 import { Fragment, useEffect, useState } from "react";
 import { getUnits, getSearchEvents } from "../../service/history";
+import { getEventById } from "../../service/event";
 import { useForm, Controller } from "react-hook-form";
-import ReactSelect from "react-select";
+import { ToastContainer, toast } from "react-toastify";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import ReactDatePicker from "react-datepicker";
-import { ToastContainer, toast } from "react-toastify";
-import { Carousel } from "react-responsive-carousel";
-import moment from "moment";
 import ModalDetails from "../../components/common/ModalDetails";
+import ModalImages from "../../components/common/ModalImages";
+import ReactSelect from "react-select";
+import moment from "moment";
 import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/outline";
+import { Menu, Transition } from "@headlessui/react";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/history/style.css";
-import { BadgeCheckIcon } from "@heroicons/react/solid";
-import { getEventById } from "../../service/event";
-import { api } from "../../constants/global";
-import { Menu, Transition } from "@headlessui/react";
-import ModalImages from "../../components/common/ModalImages";
 
 const HistoryPage = () => {
   const { handleSubmit, formState : {errors}, control } = useForm();
