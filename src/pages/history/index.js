@@ -535,7 +535,7 @@ const HistoryPage = () => {
                               <div className="flex flex-col">
                                 <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                                   <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
-                                    <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <div className="sm:rounded-lg">
                                       <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-blue-900">
                                           <tr>
