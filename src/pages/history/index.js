@@ -19,6 +19,8 @@ const HistoryPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [search, setSearch] = useState("");
   const [searchEvents, setSearchEvents] = useState([]);
+  const [printEvents, setPrintEvents] = useState([]);
+  const [nameFile, setNameFile] = useState("");
   const [loading, setLoading] = useState(false);
   const [event, setEvent] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -96,6 +98,18 @@ const HistoryPage = () => {
     const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
     const final_date_value = moment(data.final_date).format("YYYY-MM-DD");
     await getSearchEvents(initial_date_value,final_date_value,unit_name_value).then(events => {
+      const print_events = events.map(event => {
+        return {
+          "Proveedor": event.provider,
+          "Operador Logistico": event.logistic_operator,
+          "Placa": event.unitid,
+          "Tipo de Servicio": event.type_of_service,
+          "Checkpoint": event.checkpoint,
+          "Nombre del Conductor": event.driver_fullname,
+          "Fecha de Creación": event.datetime
+        };
+      });
+
       if(events.length === 0){
         toast.error("🧐 No se hay resutados", {
           className: "font-bold",
@@ -110,6 +124,8 @@ const HistoryPage = () => {
         });
       }
       setSearchEvents(events);
+      setPrintEvents(print_events);
+      setNameFile(`Reporte de eventos desde ${initial_date_value} hasta ${final_date_value}`);
       setLoading(false);
     })
   }
@@ -139,6 +155,8 @@ const HistoryPage = () => {
         prevPage={prevPage}
         nextPage={nextPage}
         searchEvents={searchEvents}
+        printEvents={printEvents}
+        nameFile={nameFile}
       />
       <ToastContainer />
     </>
