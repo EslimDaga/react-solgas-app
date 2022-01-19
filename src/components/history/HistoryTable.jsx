@@ -21,6 +21,7 @@ const HistoryTable = ({
   loading,
   prevPage,
   nextPage,
+  searchEvents,
 }) => {
   return (
     <div className="bg-white">
@@ -127,7 +128,7 @@ const HistoryTable = ({
                   </div>
                   <div
                     className={
-                      `text-center self-center lg:ml-2 sm:mt-4 lg:mt-8` +
+                      `flex text-center self-center lg:ml-2 sm:mt-4 lg:mt-8` +
                       (errors.initial_date ||
                       errors.final_date ||
                       errors.unit_name
@@ -148,6 +149,19 @@ const HistoryTable = ({
                       style={{ transition: "all .15s ease" }}
                     >
                       <div className="inline-flex items-center">Enviar</div>
+                    </button>
+                    <button
+                      disabled={searchEvents.length === 0 ? true : false}
+                      className={
+                        `bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full` +
+                        (searchEvents.length === 0
+                          ? " opacity-50 cursor-not-allowed"
+                          : "")
+                      }
+                      onClick={() => console.log("I am clicked")}
+                      style={{ transition: "all .15s ease" }}
+                    >
+                      <div className="inline-flex items-center">Exportar</div>
                     </button>
                   </div>
                 </form>
