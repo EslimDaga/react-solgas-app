@@ -138,6 +138,7 @@ const HistoryPage = () => {
         loading={loading}
         prevPage={prevPage}
         nextPage={nextPage}
+        searchEvents={searchEvents}
       />
       <ToastContainer />
     </>
