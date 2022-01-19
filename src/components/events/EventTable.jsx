@@ -90,7 +90,7 @@ const EventTable = () => {
           <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
             <section className="antialiased text-gray-600 w-full">
               <div className="flex flex-col justify-center">
-                <InputSearch search={search} onSearchChange={onSearchChange} />
+                <InputSearch search={search} onSearchChange={onSearchChange} label="Buscar por Unidad"/>
                 <div className="w-full mx-auto bg-white rounded-lg">
                   <div className="lg:pr-3 sm:pr-1 lg:pl-3 sm:pl-1 pb-3">
                     <div className="flex flex-col">
