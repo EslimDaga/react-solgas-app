@@ -2,7 +2,7 @@ import { useEffect, useState, Fragment } from "react";
 import { PlusCircleIcon, SearchCircleIcon } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { getCheckpoints } from "../../service/checkpoint";
+import { getCheckpoinByName, getCheckpoints } from "../../service/checkpoint";
 import { render } from "@testing-library/react";
 import { css, Global } from "@emotion/react";
 import cache from "../../helpers/cache";
@@ -18,11 +18,12 @@ render(
 );
 
 const CheckpointTable = () => {
-
+  const [checkpoint, setCheckpoint] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [search, setSearch] = useState("");
   const [showModalCreateCheckpoint, setShowModalCreateCheckpoint] = useState(false);
+  const [showModalViewCheckpoint, setShowModalViewCheckpoint] = useState(false);
 
   const token = cache.getItem("user").token;
 
@@ -67,6 +68,19 @@ const CheckpointTable = () => {
     setShowModalCreateCheckpoint(false);
   }
 
+  const openModalViewCheckpoint = (name, state) => {
+    getCheckpoinByName(name).then(checkpoint => {
+      setCheckpoint(checkpoint);
+      setShowModalViewCheckpoint(state);
+    }).catch(e => {
+      console.log(e)
+    })
+  }
+
+  const closeModalViewCheckpoint = () => {
+    setShowModalViewCheckpoint(false);
+  }
+
   return (
     <>
       {showModalCreateCheckpoint && (
@@ -98,6 +112,47 @@ const CheckpointTable = () => {
                             width="100%"
                             height="770px"
                             src={`http://checkpoint.segursat.com/api/create-checkpoint/${token}`}
+                          ></iframe>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      )}
+      {showModalViewCheckpoint && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none h-100-vh">
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-1xl font-semibold self-center">
+                    Detalles del Evento
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-gray-900 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={closeModalViewCheckpoint}
+                  >
+                    <span className="bg-transparent text-gray-900 h-6 w-6 text-xl block outline-none focus:outline-none">
+                      x
+                    </span>
+                  </button>
+                </div>
+                <div className="relative">
+                  <div className="w-full bg-gray-100">
+                    <div className="bg-white rounded-lg shadow-sm">
+                      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
+                        <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                          <iframe
+                            id="inlineFrameExample"
+                            title="Inline Frame Example"
+                            width="100%"
+                            height="698px"
+                            src={`http://checkpoint.segursat.com/api/get-checkpoint/${checkpoint.name}/${token}`}
                           ></iframe>
                         </div>
                       </div>
@@ -219,7 +274,15 @@ const CheckpointTable = () => {
                                           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                                             <div className="py-1">
                                               <Menu.Item>
-                                                <button className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm">
+                                                <button
+                                                  className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                  onClick={() =>
+                                                    openModalViewCheckpoint(
+                                                      checkpoint.name,
+                                                      true
+                                                    )
+                                                  }
+                                                >
                                                   Ver
                                                 </button>
                                               </Menu.Item>
