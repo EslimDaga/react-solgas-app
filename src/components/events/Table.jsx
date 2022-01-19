@@ -1,6 +1,3 @@
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
-import { Fragment } from "react";
 import Dropdown from "../common/Dropdown";
 import NoResultsFound from "../common/NoResultsFound";
 
