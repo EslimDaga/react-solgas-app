@@ -6,6 +6,7 @@ import { Controller } from "react-hook-form";
 import ReactSelect from "react-select";
 import InputSearch from "../common/InputSearch";
 import NoResultsFound from "../common/NoResultsFound";
+import exportFromJSON from "export-from-json";
 
 const HistoryTable = ({
   handleSubmit,
@@ -22,7 +23,16 @@ const HistoryTable = ({
   prevPage,
   nextPage,
   searchEvents,
+  printEvents,
+  nameFile,
 }) => {
+  const data = printEvents;
+  const fileName = nameFile;
+  const exportType = "xls";
+
+  const ExportToExcel = () => {
+    exportFromJSON({ data, fileName, exportType });
+  };
   return (
     <div className="bg-white">
       <div className="pt-1">
@@ -158,7 +168,7 @@ const HistoryTable = ({
                           ? " opacity-50 cursor-not-allowed"
                           : "")
                       }
-                      onClick={() => console.log("I am clicked")}
+                      onClick={ExportToExcel}
                       style={{ transition: "all .15s ease" }}
                     >
                       <div className="inline-flex items-center">Exportar</div>
