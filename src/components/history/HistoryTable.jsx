@@ -1,9 +1,10 @@
 import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, SearchCircleIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
 import ReactDatePicker from "react-datepicker";
 import { Controller } from "react-hook-form";
 import ReactSelect from "react-select";
+import InputSearch from "../common/InputSearch";
 import NoResultsFound from "../common/NoResultsFound";
 
 const HistoryTable = ({
@@ -21,7 +22,6 @@ const HistoryTable = ({
   prevPage,
   nextPage,
 }) => {
-  console.log(search)
   return (
     <div className="bg-white">
       <div className="pt-1">
@@ -155,18 +155,11 @@ const HistoryTable = ({
                   <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
                     Buscar por Conductor
                   </label>
-                  <div className="relative">
-                    <div className="absolute top-4 left-3">
-                      <SearchCircleIcon className="h-6 w-6" />
-                    </div>
-                    <input
-                      type="text"
-                      className="bg-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-                      placeholder="Buscar..."
-                      value={search}
-                      onChange={onSearchChange}
-                    />
-                  </div>
+                  <InputSearch
+                    search={search}
+                    onSearchChange={onSearchChange}
+                    label="Buscar..."
+                  />
                 </div>
               </div>
               <div className="bg-white">
