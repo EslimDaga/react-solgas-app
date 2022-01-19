@@ -1,6 +1,6 @@
 import { SearchCircleIcon } from "@heroicons/react/solid";
 
-const InputSearch = ({search, onSearchChange}) => {
+const InputSearch = ({search, onSearchChange, label}) => {
   return (
     <div className="items-center pb-3 sm:relative lg:flex">
       <div className="relative">
@@ -10,7 +10,7 @@ const InputSearch = ({search, onSearchChange}) => {
         <input
           type="text"
           className="bg-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-          placeholder="Buscar por Unidad"
+          placeholder={label}
           value={search}
           onChange={onSearchChange}
         />
