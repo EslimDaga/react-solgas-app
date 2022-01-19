@@ -4,10 +4,6 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { getCheckpoints } from "../../service/checkpoint";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const CheckpointTable = () => {
 
   const [checkpoints, setCheckpoints] = useState([]);
