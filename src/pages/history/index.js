@@ -90,6 +90,7 @@ const HistoryPage = () => {
   }
 
   const onSubmitForm = async(data) => {
+    setSearchEvents([]);
     setLoading(true);
     const unit_name_value = data.unit_name.value;
     const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
