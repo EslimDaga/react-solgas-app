@@ -21,7 +21,6 @@ export const getCheckpoinByName = async(name) => {
       },
     }
   );
-  console.log(response.data);
   return response.data;
 }
 
