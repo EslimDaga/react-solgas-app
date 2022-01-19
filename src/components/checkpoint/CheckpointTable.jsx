@@ -276,18 +276,16 @@ const CheckpointTable = () => {
                                               <Menu.Item>
                                                 <button
                                                   className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
-                                                  onClick={() =>
-                                                    openModalViewCheckpoint(
-                                                      checkpoint.name,
-                                                      true
-                                                    )
+                                                  onClick={() => openModalViewCheckpoint(checkpoint.name,true)
                                                   }
                                                 >
                                                   Ver
                                                 </button>
                                               </Menu.Item>
                                               <Menu.Item>
-                                                <button className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm">
+                                                <button
+                                                  className="bg-gray-100 text-gray-900 w-full block px-4 py-2 text-sm"
+                                                >
                                                   Eliminar
                                                 </button>
                                               </Menu.Item>
