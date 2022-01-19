@@ -12,6 +12,19 @@ export const getCheckpoints = async () => {
   return response.data;
 }
 
+export const getCheckpoinByName = async(name) => {
+  const token = cache.getItem("user").token;
+  const response = await axios.get(`${api}/control/web/api/get-checkpoint/${name}/`,
+    {
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    }
+  );
+  console.log(response.data);
+  return response.data;
+}
+
 axios.interceptors.response.use(
   (response) => response,
   (error) => {
