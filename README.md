@@ -71,3 +71,29 @@ Eliminar checkpoints por NAME
 Crear checkpoints
 
 ### `/control/web/api/create-checkpoint/`
+
+### Mostrar Conductores
+
+Mostrar todos los conductores
+
+### `/control/web/api/get-drivers/`
+
+### Mostrar conductor por DNI
+
+Mostrar conductor por su DNI
+
+### `/control/web/api/get-driver/<int:dni>/`
+
+### Crear conductores
+
+Crear Conductores
+
+### `/control/web/api/create-driver/`
+
+### Eliminar Conductores por DNI
+
+Eliminar Conductores por su DNI
+
+### `/control/web/api/delete-driver/<int:dni>/`
+
+
