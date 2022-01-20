@@ -29,7 +29,7 @@ const navItems = [
 
 const Header = () => {
   return (
-    <Popover className="bg-slate-50 p-2 mt-0 fixed w-full z-10 top-0">
+    <Popover className="bg-slate-50 mt-0 fixed w-full z-10 top-0">
       <div className="mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
