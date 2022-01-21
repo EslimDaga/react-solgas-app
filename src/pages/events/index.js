@@ -8,7 +8,7 @@ const EventPage = () => {
   return (
     <>
       <Header/>
-      <Breadcrumb title="Eventos"/>
+      <Breadcrumb title="Eventos" url="/events"/>
       <EventTable/>
     </>
   )
