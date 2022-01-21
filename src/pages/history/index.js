@@ -133,7 +133,7 @@ const HistoryPage = () => {
   return (
     <>
       <Header />
-      <Breadcrumb title="Historial" />
+      <Breadcrumb title="Historial" url="/history" />
       {showModal ? (
         <ModalDetails event={event} closeModal={closeModal} />
       ) : null}
