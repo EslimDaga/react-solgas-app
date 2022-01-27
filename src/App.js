@@ -7,6 +7,7 @@ import Logout from "./components/common/Logout";
 import PrivateRoute from "./components/common/PrivateRoute";
 import PublicRoute from "./components/common/PublicRoute";
 import Checkpoint from "./pages/checkpoint";
+import DriverPage from "./pages/drivers";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/events" element={<EventPage/>}/>
           <Route exact path="/history" element={<HistoryPage/>}/>
           <Route exact path="/checkpoint" element={<Checkpoint/>}/>
+          <Route exact path="/drivers" element={<DriverPage/>}/>
           <Route exact path="/logout" element={<Logout/>}/>
         </Route>
         <Route path="*" element={<NotFound/>}/>
