@@ -27,7 +27,7 @@ const ModalCreateCheckpoint = ({ closeModalCreateCheckpoint, token }) => {
                         title="Inline Frame Example"
                         width="100%"
                         height="770px"
-                        src={`http://checkpoint.segursat.com/api/create-checkpoint/${token}`}
+                        src={`http://checkpoint.segursat.com:8080/api/create-checkpoint/${token}`}
                       ></iframe>
                     </div>
                   </div>

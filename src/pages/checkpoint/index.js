@@ -6,7 +6,7 @@ const Checkpoint = () => {
   return (
     <>
       <Header />
-      <Breadcrumb title="Checkpoint" />
+      <Breadcrumb title="Checkpoint" url="/checkpoint" />
       <CheckpointTable />
     </>
   )

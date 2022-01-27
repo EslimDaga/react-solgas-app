@@ -93,36 +93,16 @@ const Header = () => {
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                <Link
-                  to="/events"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
-                  Eventos
-                </Link>
-                <Link
-                  to="/history"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
-                  Historial
-                </Link>
-                <Link
-                  to="/checkpoint"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
-                  Checkpoint
-                </Link>
-                <a
-                  href="/"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
-                  Conductores
-                </a>
-                <a
-                  href="/"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
-                >
-                  Unidades
-                </a>
+                {navItems.map((item) => (
+                  <NavLink
+                    key={item.path}
+                    end
+                    to={`/${item.path}`}
+                    className="text-base font-medium text-gray-500 hover:text-gray-900 px-2 py-2 rounded-md"
+                  >
+                    {item.title}
+                  </NavLink>
+                ))}
               </div>
               <div>
                 <Link
