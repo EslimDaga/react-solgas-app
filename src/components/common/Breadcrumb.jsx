@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Breadcrumb = ({ title, url }) => {
   return (
-    <nav className="flex bg-neutral-50 dark:bg-gray-800 text-blue-700 py-3 px-7 mb-4 pt-28" aria-label="Breadcrumb">
+    <nav className="flex bg-neutral-50 dark:bg-gray-800 text-blue-700 py-3 px-7 pb-4 pt-28" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         <li className="inline-flex items-center">
           <Link to="/" className="text-neutral-700 dark:text-gray-100 hover:text-blue-900 text-sm inline-flex items-center font-medium">
