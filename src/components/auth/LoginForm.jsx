@@ -18,7 +18,11 @@ const LoginForm = () => {
     await login(data).then(res => {
       toast.success("😎 Bienvenido a Solgas", {
         className: "font-bold",
-        style: { fontFamily: 'Quicksand' },
+        style: {
+          fontFamily: "Quicksand",
+          backgroundColor: "#374151",
+          color: "#fff",
+        },
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -34,7 +38,11 @@ const LoginForm = () => {
     }).catch(err => {
       toast.error("😟 Datos invalidos", {
         className: "font-bold",
-        style: { fontFamily: 'Quicksand' },
+        style: {
+          fontFamily: 'Quicksand',
+          backgroundColor: '#374151',
+          color: '#fff'
+        },
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: false,
