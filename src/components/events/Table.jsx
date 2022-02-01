@@ -3,8 +3,8 @@ import NoResultsFound from "../common/NoResultsFound";
 
 const Table = ({filteredEvents, openModal, openModalImages, search}) => {
   return (
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-blue-900">
+    <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+      <thead className="bg-blue-900 dark:bg-gray-900">
         <tr>
           <th
             scope="col"
@@ -56,31 +56,31 @@ const Table = ({filteredEvents, openModal, openModalImages, search}) => {
           </th>
         </tr>
       </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
+      <tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
         {filteredEvents().map((event) => (
           <tr key={event.id}>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.provider}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.logistic_operator}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.unitid}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.type_of_service}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.checkpoint}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.driver_fullname}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {event.datetime}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               <Dropdown
                 openModal={openModal}
                 openModalImages={openModalImages}

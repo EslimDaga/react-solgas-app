@@ -5,11 +5,11 @@ const InputSearch = ({search, onSearchChange, label}) => {
     <div className="items-center pb-3 sm:relative lg:flex">
       <div className="relative">
         <div className="absolute top-4 left-3">
-          <SearchCircleIcon className="h-6 w-6" />
+          <SearchCircleIcon className="h-6 w-6 dark:text-gray-100" />
         </div>
         <input
           type="text"
-          className="bg-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+          className="bg-gray-100 dark:bg-gray-700 dark:placeholder:text-gray-100 h-14 w-full pl-12 pr-20 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
           placeholder={label}
           value={search}
           onChange={onSearchChange}
