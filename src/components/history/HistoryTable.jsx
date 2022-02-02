@@ -29,10 +29,10 @@ const HistoryTable = ({
     exportFromJSON({ data, fileName, exportType });
   };
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-800">
       <div className="pt-1">
         <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
-          <section className="antialiased text-gray-600 w-full">
+          <section className="antialiased text-gray-600 dark:text-gray-100 w-full">
             <div className="flex flex-col justify-center">
               <FormSearchEvents
                 handleSubmit={handleSubmit}
@@ -45,9 +45,9 @@ const HistoryTable = ({
                 search={search}
                 onSearchChange={onSearchChange}
               />
-              <div className="bg-white">
+              <div className="bg-white dark:bg-gray-800">
                 <div className="pt-1">
-                  <div className="mx-auto flex items-center space-x-2 sm:px-3 lg:max-w-full lg:px-0">
+                  <div className="mx-auto flex items-center space-x-2 sm:px-3 lg:max-w-full lg:px-0 dark:bg-gray-800">
                     <section className="antialiased text-gray-600 w-full">
                       <Table
                         filteredEvents={filteredEvents}

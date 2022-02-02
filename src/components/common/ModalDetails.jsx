@@ -5,8 +5,8 @@ const ModalDetails = ({ event, closeModal }) => {
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative w-auto my-6 mx-auto max-w-3xl">
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-900 outline-none focus:outline-none">
-            <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-800 outline-none focus:outline-none">
+            <div className="flex items-start justify-between p-5 border-solid border-blueGray-200 rounded-t">
               <h3 className="text-1xl font-semibold self-center dark:text-gray-100">
                 Detalles del Evento
               </h3>
@@ -20,8 +20,8 @@ const ModalDetails = ({ event, closeModal }) => {
               </button>
             </div>
             <div className="relative p-5 flex-auto">
-              <div className="w-full bg-gray-100 dark:bg-gray-900 flex">
-                <div className="bg-white dark:bg-gray-900 rounded-lg shadow-sm">
+              <div className="w-full bg-gray-100 dark:bg-gray-800 flex">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <div className="flex flex-col sm:mt-0 gap-7 text-sm">
                       <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">

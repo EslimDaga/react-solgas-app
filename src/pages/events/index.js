@@ -6,11 +6,11 @@ const EventPage = () => {
 
 
   return (
-    <>
+    <section className="h-screen dark:bg-gray-800">
       <Header/>
       <Breadcrumb title="Eventos" url="/events"/>
       <EventTable/>
-    </>
+    </section>
   )
 }
 

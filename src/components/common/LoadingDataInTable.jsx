@@ -1,8 +1,8 @@
 const LoadingDataInTable = () => {
   return (
     <div className="flex justify-center">
-      <div className="w-full h-48 bg-gray-100 flex justify-center items-center">
-        <div className="w-3/5 bg-green-100 rounded-lg shadow-sm p-5 border-dashed border border-green-500 flex flex-col  justify-between items-center gap-2 sm:gap-0">
+      <div className="w-full h-48 bg-gray-100 dark:bg-gray-700 flex justify-center items-center">
+        <div className="w-3/5 bg-green-100 dark:bg-gray-600 rounded-lg shadow-sm p-5 border-dashed border border-green-500 flex flex-col  justify-between items-center gap-2 sm:gap-0">
           <div className="flex flex-col sm:flex-row justify-start items-center">
             <div className="flex rounded-md">
               <svg
@@ -27,7 +27,7 @@ const LoadingDataInTable = () => {
               </svg>
             </div>
             <div className="text-center sm:text-left">
-              <h1 className="text-gray-900 font-bold tracking-wider">
+              <h1 className="text-gray-900 dark:text-gray-100 font-bold tracking-wider">
                 Cargando...
               </h1>
             </div>

@@ -18,7 +18,7 @@ const FormSearchEvents = ({
     <div className="items-center pb-3 sm:relative lg:flex justify-between">
       <form onSubmit={handleSubmit(onSubmitForm)} className="mx-1 lg:flex">
         <div className="relative w-full md:w-full sm:mb-2">
-          <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
+          <label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 ml-2">
             Fecha Inicial
           </label>
           <div className="relative">
@@ -34,7 +34,7 @@ const FormSearchEvents = ({
               }}
               render={({ field }) => (
                 <ReactDatePicker
-                  className="bg-gray-200 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                  className="bg-gray-200 dark:bg-gray-700 dark:placeholder:text-gray-100 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                   selected={field.value}
                   //onChange={(date) => setStartDate(date)}
                   onChange={(date) => field.onChange(date)}
@@ -50,7 +50,7 @@ const FormSearchEvents = ({
           </div>
         </div>
         <div className="relative w-full md:w-full sm:mb-2">
-          <label className="block text-gray-700 text-base font-bold mb-2 lg:ml-2">
+          <label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 lg:ml-2">
             Fecha Final
           </label>
           <div className="relative lg:ml-2">
@@ -65,7 +65,7 @@ const FormSearchEvents = ({
               }}
               render={({ field }) => (
                 <ReactDatePicker
-                  className="bg-gray-200 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                  className="bg-gray-200 dark:bg-gray-700 dark:placeholder:text-gray-100 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                   selected={field.value}
                   onChange={(date) => field.onChange(date)}
                   placeholderText="Seleccionar Fecha"
@@ -80,7 +80,7 @@ const FormSearchEvents = ({
           </div>
         </div>
         <div className="relative w-full md:w-full">
-          <label className="block text-gray-700 text-base font-bold mb-2 lg:ml-2">
+          <label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 lg:ml-2">
             Unidades
           </label>
           <div className="relative lg:ml-2">
@@ -97,7 +97,7 @@ const FormSearchEvents = ({
                   {...field}
                   isClearable
                   placeholder="Buscar Unidad"
-                  className="bg-gray-200 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                  className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
                   options={allUnits}
                 />
               )}
@@ -145,7 +145,7 @@ const FormSearchEvents = ({
         </div>
       </form>
       <div className="flex flex-col">
-        <label className="block text-gray-700 text-base font-bold mb-2 ml-2">
+        <label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 ml-2">
           Buscar por Conductor
         </label>
         <InputSearch

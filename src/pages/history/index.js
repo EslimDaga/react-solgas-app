@@ -131,7 +131,7 @@ const HistoryPage = () => {
   }
 
   return (
-    <>
+    <section className="h-screen dark:bg-gray-800">
       <Header />
       <Breadcrumb title="Historial" url="/history" />
       {showModal ? (
@@ -159,7 +159,7 @@ const HistoryPage = () => {
         nameFile={nameFile}
       />
       <ToastContainer />
-    </>
+    </section>
   );
 }
 
