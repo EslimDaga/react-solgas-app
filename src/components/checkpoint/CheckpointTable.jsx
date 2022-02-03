@@ -102,7 +102,7 @@ const CheckpointTable = () => {
           token={token}
         />
       )}
-      <div className="bg-white">
+      <div className="bg-white dark:bg-gray-800">
         <div className="pt-1">
           <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
             <section className="antialiased text-gray-600 w-full">
