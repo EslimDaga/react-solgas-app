@@ -122,7 +122,7 @@ const CheckpointTable = () => {
                   </button>
                 </div>
                 <div className="w-full mx-auto bg-white rounded-lg">
-                  <div className="lg:pr-3 sm:pr-1 lg:pl-3 sm:pl-1 pb-3">
+                  <div className="lg:pr-3 sm:pr-1 lg:pl-3 sm:pl-1 pb-3 dark:bg-gray-800">
                     <div className="flex flex-col">
                       <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
