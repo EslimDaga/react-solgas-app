@@ -66,7 +66,7 @@ const DriverTable = () => {
                                 className={
                                   `border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring-blue-900 w-full font-bold` +
                                   (errors.dni
-                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent"
+                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent font-bold"
                                     : "")
                                 }
                                 style={{ transition: "all .15s ease" }}
@@ -74,6 +74,18 @@ const DriverTable = () => {
                                   required: {
                                     value: true,
                                     message: "El dni es requerido",
+                                  },
+                                  pattern: {
+                                    value: /^[0-9]+$/,
+                                    message: "El dni debe tener solo números y 8 caracteres",
+                                  },
+                                  minLength: {
+                                    value: 8,
+                                    message: "El dni debe tener 8 caracteres",
+                                  },
+                                  maxLength: {
+                                    value: 8,
+                                    message: "El dni debe tener 8 caracteres",
                                   },
                                 })}
                               />
@@ -88,7 +100,9 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.lastname ? " text-red-500 dark:text-red-500" : "")
+                                  (errors.lastname
+                                    ? " text-red-500 dark:text-red-500"
+                                    : "")
                                 }
                               >
                                 Apellidos
@@ -109,6 +123,10 @@ const DriverTable = () => {
                                     value: true,
                                     message: "El apellido es requerido",
                                   },
+                                  pattern: {
+                                    value: /^[a-z A-Z]+$/,
+                                    message: "El apellido debe tener solo letras",
+                                  }
                                 })}
                               />
                               {errors.lastname && (
@@ -122,7 +140,9 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.firstname ? " text-red-500 dark:text-red-500" : "")
+                                  (errors.firstname
+                                    ? " text-red-500 dark:text-red-500"
+                                    : "")
                                 }
                               >
                                 Nombres
@@ -143,6 +163,10 @@ const DriverTable = () => {
                                     value: true,
                                     message: "El nombre es requerido",
                                   },
+                                  pattern: {
+                                    value: /^[a-z A-Z]+$/,
+                                    message: "El nombre debe tener solo letras",
+                                  }
                                 })}
                               />
                               {errors.firstname && (
@@ -156,7 +180,9 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.license_number ? " text-red-500 dark:text-red-500" : "")
+                                  (errors.license_number
+                                    ? " text-red-500 dark:text-red-500"
+                                    : "")
                                 }
                               >
                                 Número de Licencia
