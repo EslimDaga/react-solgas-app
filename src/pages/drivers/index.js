@@ -2,6 +2,7 @@ import Breadcrumb from "../../components/common/Breadcrumb";
 import Header from "../../components/Header";
 import { Helmet } from "react-helmet";
 import Favicon from "../../assets/images/ico-solgas.png";
+import DriverTable from "../../components/drivers/DriverTable";
 
 const DriverPage = () => {
   return (
@@ -12,6 +13,7 @@ const DriverPage = () => {
       </Helmet>
       <Header />
       <Breadcrumb title="Conductores" url="/drivers" />
+      <DriverTable />
     </>
   );
 };
