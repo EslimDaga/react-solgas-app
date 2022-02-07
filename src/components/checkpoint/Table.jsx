@@ -88,7 +88,9 @@ const Table = ({ filteredCheckpoints, openModalViewCheckpoint, search }) => {
                         </button>
                       </Menu.Item>
                       <Menu.Item>
-                        <button className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm">
+                        <button
+                          className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm"
+                        >
                           Eliminar
                         </button>
                       </Menu.Item>
