@@ -8,6 +8,8 @@ import "../../assets/styles/css/auth/style.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeContext } from "../../store/context/ThemeContext";
 import { useContext } from "react";
+import { Helmet } from "react-helmet";
+import Favicon from "../../assets/images/ico-solgas.png";
 
 const AuthPage = () => {
 
@@ -15,6 +17,10 @@ const AuthPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Solgas - Login</title>
+        <link rel="icon" type="image/png" href={Favicon} sizes="16x16" />
+      </Helmet>
       <main>
         <section className="absolute w-full h-full">
           <div

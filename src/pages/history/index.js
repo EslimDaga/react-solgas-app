@@ -12,6 +12,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../../assets/styles/css/history/style.css";
 import HistoryTable from "../../components/history/HistoryTable";
+import { Helmet } from "react-helmet";
+import Favicon from "../../assets/images/ico-solgas.png";
 
 const HistoryPage = () => {
   const { handleSubmit, formState : {errors}, control } = useForm();
@@ -132,6 +134,10 @@ const HistoryPage = () => {
 
   return (
     <section className="h-screen dark:bg-gray-800">
+      <Helmet>
+        <title>Solgas - Historial</title>
+        <link rel="icon" type="image/png" href={Favicon} sizes="16x16" />
+      </Helmet>
       <Header />
       <Breadcrumb title="Historial" url="/history" />
       {showModal ? (
