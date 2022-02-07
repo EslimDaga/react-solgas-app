@@ -52,7 +52,9 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.dni ? " text-red-500" : "")
+                                  (errors.dni
+                                    ? " text-red-500 dark:text-red-500"
+                                    : "")
                                 }
                               >
                                 Documento de Identidad
@@ -62,9 +64,9 @@ const DriverTable = () => {
                                 autoComplete="off"
                                 name="dni"
                                 className={
-                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring-blue-900 w-full font-bold` +
+                                  `border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring-blue-900 w-full font-bold` +
                                   (errors.dni
-                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent"
                                     : "")
                                 }
                                 style={{ transition: "all .15s ease" }}
@@ -86,7 +88,7 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.lastname ? " text-red-500" : "")
+                                  (errors.lastname ? " text-red-500 dark:text-red-500" : "")
                                 }
                               >
                                 Apellidos
@@ -96,9 +98,9 @@ const DriverTable = () => {
                                 autoComplete="off"
                                 name="lastname"
                                 className={
-                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  `border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring w-full font-bold` +
                                   (errors.lastname
-                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent"
                                     : "")
                                 }
                                 style={{ transition: "all .15s ease" }}
@@ -120,7 +122,7 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.firstname ? " text-red-500" : "")
+                                  (errors.firstname ? " text-red-500 dark:text-red-500" : "")
                                 }
                               >
                                 Nombres
@@ -130,9 +132,9 @@ const DriverTable = () => {
                                 autoComplete="off"
                                 name="firstname"
                                 className={
-                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  `border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring w-full font-bold` +
                                   (errors.firstname
-                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent"
                                     : "")
                                 }
                                 style={{ transition: "all .15s ease" }}
@@ -154,7 +156,7 @@ const DriverTable = () => {
                               <label
                                 className={
                                   `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
-                                  (errors.license_number ? " text-red-500" : "")
+                                  (errors.license_number ? " text-red-500 dark:text-red-500" : "")
                                 }
                               >
                                 Número de Licencia
@@ -164,9 +166,9 @@ const DriverTable = () => {
                                 autoComplete="off"
                                 name="license_number"
                                 className={
-                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  `border-2 px-3 py-3 dark:border-gray-700 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring w-full font-bold` +
                                   (errors.license_number
-                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    ? "border-2 border-red-500 dark:border-red-500 focus:ring-transparent"
                                     : "")
                                 }
                                 style={{ transition: "all .15s ease" }}
@@ -188,8 +190,11 @@ const DriverTable = () => {
                             <div className="text-center mt-6">
                               <button
                                 className={
-                                  `bg-blue-900 dark:bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full` +
-                                  (errors.dni || errors.lastname || errors.firstname || errors.license_number
+                                  `bg-blue-900 dark:bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full` +
+                                  (errors.dni ||
+                                  errors.lastname ||
+                                  errors.firstname ||
+                                  errors.license_number
                                     ? " opacity-50 cursor-not-allowed"
                                     : "")
                                 }
