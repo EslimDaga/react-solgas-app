@@ -22,12 +22,12 @@ render(
 );
 
 const navItems = [
-  {title : "Eventos", path : "events"},
-  {title : "Historial", path : "history"},
-  {title : "Checkpoint", path : "checkpoint"},
-  {title : "Conductores", path : "drivers"},
-  {title : "Unidades", path : "units"}
-]
+  { title: "Eventos", path: "events" },
+  { title: "Historial", path: "history" },
+  { title: "Checkpoint", path: "checkpoint" },
+  { title: "Conductores", path: "drivers" },
+  { title: "Unidades", path: "units" },
+];
 
 const Header = () => {
 
