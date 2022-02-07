@@ -1,9 +1,16 @@
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
+import { deleteCheckpoint } from "../../service/checkpoint";
 import NoResultsFound from "../common/NoResultsFound";
 
 const Table = ({ filteredCheckpoints, openModalViewCheckpoint, search }) => {
+
+  const deleteCheckpointAction = async(checkpoint) => {
+    await deleteCheckpoint(checkpoint);
+    window.location.reload();
+  }
+
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -90,6 +97,7 @@ const Table = ({ filteredCheckpoints, openModalViewCheckpoint, search }) => {
                       <Menu.Item>
                         <button
                           className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm"
+                          onClick={() => deleteCheckpointAction(checkpoint.name)}
                         >
                           Eliminar
                         </button>
