@@ -2,11 +2,13 @@ import { useState } from "react";
 import Pagination from "../common/Pagination";
 import InputSearch from "../common/InputSearch";
 import Table from "./Table";
-import { PlusCircleIcon } from "@heroicons/react/solid";
+import { ExclamationCircleIcon, PlusCircleIcon } from "@heroicons/react/solid";
+import { useForm } from "react-hook-form";
 
 const DriverTable = () => {
 
   const [showModalCreateDriver, setShowModalCreateDriver] = useState(false);
+  const { register, handleSubmit, formState:{errors}} = useForm();
 
   const openModalCreateDriver = () => {
     setShowModalCreateDriver(true);
@@ -14,6 +16,10 @@ const DriverTable = () => {
 
   const closeModalCreateDriver = () => {
     setShowModalCreateDriver(false);
+  }
+
+  const onSubmit = (data) => {
+    console.log(data);
   }
 
   return (
@@ -41,66 +47,152 @@ const DriverTable = () => {
                     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1">
                         <div className="flex flex-col sm:mt-0 gap-7 text-sm px-4 py-4">
-                          <form>
+                          <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="relative w-full mb-3">
                               <label
-                                className={`block text-gray-700 dark:text-gray-100 text-base font-bold mb-2`}
+                                className={
+                                  `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
+                                  (errors.dni ? " text-red-500" : "")
+                                }
                               >
                                 Documento de Identidad
                               </label>
                               <input
                                 type="text"
                                 autoComplete="off"
-                                name="username"
-                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold`}
+                                name="dni"
+                                className={
+                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded-md text-base shadow focus:outline-none focus:ring-blue-900 w-full font-bold` +
+                                  (errors.dni
+                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    : "")
+                                }
                                 style={{ transition: "all .15s ease" }}
+                                {...register("dni", {
+                                  required: {
+                                    value: true,
+                                    message: "El dni es requerido",
+                                  },
+                                })}
                               />
+                              {errors.dni && (
+                                <span className="text-red-500 text-sm font-bold flex mt-1">
+                                  {errors.dni.message}{" "}
+                                  <ExclamationCircleIcon className="text-red-500 h-5 w-5 ml-1" />
+                                </span>
+                              )}
                             </div>
                             <div className="relative w-full mb-3">
                               <label
-                                className={`block text-gray-700 dark:text-gray-100 text-base font-bold mb-2`}
+                                className={
+                                  `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
+                                  (errors.lastname ? " text-red-500" : "")
+                                }
                               >
                                 Apellidos
                               </label>
                               <input
                                 type="text"
                                 autoComplete="off"
-                                name="username"
-                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold`}
+                                name="lastname"
+                                className={
+                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  (errors.lastname
+                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    : "")
+                                }
                                 style={{ transition: "all .15s ease" }}
+                                {...register("lastname", {
+                                  required: {
+                                    value: true,
+                                    message: "El apellido es requerido",
+                                  },
+                                })}
                               />
+                              {errors.lastname && (
+                                <span className="text-red-500 text-sm font-bold flex mt-1">
+                                  {errors.lastname.message}{" "}
+                                  <ExclamationCircleIcon className="text-red-500 h-5 w-5 ml-1" />
+                                </span>
+                              )}
                             </div>
                             <div className="relative w-full mb-3">
                               <label
-                                className={`block text-gray-700 dark:text-gray-100 text-base font-bold mb-2`}
+                                className={
+                                  `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
+                                  (errors.firstname ? " text-red-500" : "")
+                                }
                               >
                                 Nombres
                               </label>
                               <input
                                 type="text"
                                 autoComplete="off"
-                                name="username"
-                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold`}
+                                name="firstname"
+                                className={
+                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  (errors.firstname
+                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    : "")
+                                }
                                 style={{ transition: "all .15s ease" }}
+                                {...register("firstname", {
+                                  required: {
+                                    value: true,
+                                    message: "El nombre es requerido",
+                                  },
+                                })}
                               />
+                              {errors.firstname && (
+                                <span className="text-red-500 text-sm font-bold flex mt-1">
+                                  {errors.firstname.message}{" "}
+                                  <ExclamationCircleIcon className="text-red-500 h-5 w-5 ml-1" />
+                                </span>
+                              )}
                             </div>
                             <div className="relative w-full mb-3">
                               <label
-                                className={`block text-gray-700 dark:text-gray-100 text-base font-bold mb-2`}
+                                className={
+                                  `block text-gray-700 dark:text-gray-100 text-base font-bold mb-2` +
+                                  (errors.license_number ? " text-red-500" : "")
+                                }
                               >
                                 Número de Licencia
                               </label>
                               <input
                                 type="text"
                                 autoComplete="off"
-                                name="username"
-                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold`}
+                                name="license_number"
+                                className={
+                                  `border-2 px-3 py-3 placeholder-gray-400 text-gray-700 dark:text-gray-100 bg-gray-200 dark:bg-gray-700 rounded text-base shadow focus:outline-none focus:ring w-full font-bold` +
+                                  (errors.license_number
+                                    ? "border-2 border-rose-500 focus:ring-transparent"
+                                    : "")
+                                }
                                 style={{ transition: "all .15s ease" }}
+                                {...register("license_number", {
+                                  required: {
+                                    value: true,
+                                    message:
+                                      "El número de licencia es requerido",
+                                  },
+                                })}
                               />
+                              {errors.license_number && (
+                                <span className="text-red-500 text-sm font-bold flex mt-1">
+                                  {errors.license_number.message}{" "}
+                                  <ExclamationCircleIcon className="text-red-500 h-5 w-5 ml-1" />
+                                </span>
+                              )}
                             </div>
                             <div className="text-center mt-6">
                               <button
-                                className={`bg-blue-900 dark:bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full`}
+                                className={
+                                  `bg-blue-900 dark:bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full` +
+                                  (errors.dni || errors.lastname || errors.firstname || errors.license_number
+                                    ? " opacity-50 cursor-not-allowed"
+                                    : "")
+                                }
                                 type="submit"
                                 style={{ transition: "all .15s ease" }}
                               >
