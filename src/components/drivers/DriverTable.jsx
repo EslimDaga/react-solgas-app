@@ -1,14 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Pagination from "../common/Pagination";
 import InputSearch from "../common/InputSearch";
 import Table from "./Table";
 import { ExclamationCircleIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { retrieveDrivers } from "../../store/actions/Drivers";
+import { createDriver, deleteDriver } from "../../service/driver";
 
 const DriverTable = () => {
-
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
   const [showModalCreateDriver, setShowModalCreateDriver] = useState(false);
-  const { register, handleSubmit, formState:{errors}} = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+
+  const drivers = useSelector((state) => state.drivers);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(retrieveDrivers());
+  }, []);
+
+  const filteredDrivers = () => {
+    if (search.length === 0) {
+      return drivers.slice(currentPage, currentPage + 10);
+    }
+    const filtered = drivers.filter((driver) => {
+      return (
+        driver.lastname.toLowerCase().includes(search.toLowerCase()) ||
+        driver.firstname.toLowerCase().includes(search.toLowerCase()) ||
+        driver.license_number.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    return filtered.slice(currentPage, currentPage + 10);
+  }
+
+  const nextPage = () => {
+    if (currentPage + 10 < drivers.length) {
+      setCurrentPage(currentPage + 10);
+    }
+  }
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 10);
+    }
+  };
+
+  const onSearchChange = ({ target }) => {
+    setCurrentPage(0);
+    setSearch(target.value);
+    console.log(target.value);
+  };
 
   const openModalCreateDriver = () => {
     setShowModalCreateDriver(true);
@@ -19,7 +67,22 @@ const DriverTable = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
+    createDriver(data).then(() => {
+      dispatch(retrieveDrivers());
+      closeModalCreateDriver();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  const removeDriver = (id) => {
+    deleteDriver(id).then(() => {
+      dispatch(retrieveDrivers());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   return (
@@ -77,7 +140,8 @@ const DriverTable = () => {
                                   },
                                   pattern: {
                                     value: /^[0-9]+$/,
-                                    message: "El dni debe tener solo números y 8 caracteres",
+                                    message:
+                                      "El dni debe tener solo números y 8 caracteres",
                                   },
                                   minLength: {
                                     value: 8,
@@ -125,8 +189,9 @@ const DriverTable = () => {
                                   },
                                   pattern: {
                                     value: /^[a-z A-Z]+$/,
-                                    message: "El apellido debe tener solo letras",
-                                  }
+                                    message:
+                                      "El apellido debe tener solo letras",
+                                  },
                                 })}
                               />
                               {errors.lastname && (
@@ -166,7 +231,7 @@ const DriverTable = () => {
                                   pattern: {
                                     value: /^[a-z A-Z]+$/,
                                     message: "El nombre debe tener solo letras",
-                                  }
+                                  },
                                 })}
                               />
                               {errors.firstname && (
@@ -248,7 +313,11 @@ const DriverTable = () => {
             <section className="antialiased text-gray-600 w-full">
               <div className="flex flex-col justify-center">
                 <div className="items-center pb-3 flex sm:flex lg:flex justify-between">
-                  <InputSearch label="Buscar por Dni" />
+                  <InputSearch
+                    label="Buscar"
+                    search={search}
+                    onSearchChange={onSearchChange}
+                  />
                   <button
                     className="sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900"
                     onClick={openModalCreateDriver}
@@ -263,7 +332,10 @@ const DriverTable = () => {
                       <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
                           <div className="sm:rounded-lg">
-                            <Table />
+                            <Table
+                              filteredDrivers={filteredDrivers}
+                              removeDriver={removeDriver}
+                            />
                           </div>
                         </div>
                       </div>
@@ -271,7 +343,7 @@ const DriverTable = () => {
                   </div>
                 </div>
               </div>
-              <Pagination />
+              <Pagination nextPage={nextPage} prevPage={prevPage} />
             </section>
           </div>
         </div>
