@@ -24,7 +24,7 @@ const DriverTable = () => {
 
   useEffect(() => {
     dispatch(retrieveDrivers());
-  }, []);
+  }, [dispatch]);
 
   const filteredDrivers = () => {
     if (search.length === 0) {
