@@ -1,7 +1,9 @@
+import { Controller } from "react-hook-form";
+import { useContext } from "react";
+import { ThemeContext } from "../../store/context/ThemeContext";
 import InputSearch from "../common/InputSearch";
 import ReactDatePicker from "react-datepicker";
 import ReactSelect from "react-select";
-import { Controller } from "react-hook-form";
 
 const FormSearchEvents = ({
   handleSubmit,
@@ -14,6 +16,38 @@ const FormSearchEvents = ({
   search,
   onSearchChange
 }) => {
+
+  const { theme } = useContext(ThemeContext);
+
+  const customStyleWhiteMode = {
+    control: (provided, state) => ({
+      ...provided,
+      background: "#E5E7EB",
+      borderRadius: "0.5rem",
+      borderColor: state.isFocused ? "#E5E7EB" : "#E5E7EB",
+      minHeight: state.isSelected ? "56px" : "56px",
+    }),
+  };
+
+  const customStylesDarkMode = {
+    control: (provided, state) => ({
+      ...provided,
+      background: "#374151",
+      borderRadius: "0.5rem",
+      borderColor: "#374151",
+      color: state.isSelected ? "#fff" : "#fff",
+      minHeight: state.isSelected ? "56px" : "56px",
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? "#fff" : "#fff",
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      color: state.isSelected ? "#fff" : "#fff",
+    })
+  };
+
   return (
     <div className="items-center pb-3 sm:relative lg:flex justify-between">
       <form onSubmit={handleSubmit(onSubmitForm)} className="mx-1 lg:flex">
@@ -84,24 +118,47 @@ const FormSearchEvents = ({
             Unidades
           </label>
           <div className="relative lg:ml-2">
-            <Controller
-              name="unit_name"
-              isClearable
-              rules={{
-                required: true,
-                message: "Este campo es requerido",
-              }}
-              control={control}
-              render={({ field }) => (
-                <ReactSelect
-                  {...field}
-                  isClearable
-                  placeholder="Buscar Unidad"
-                  className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-                  options={allUnits}
-                />
-              )}
-            />
+            {theme === "light" ? (
+              <Controller
+                name="unit_name"
+                isClearable
+                rules={{
+                  required: true,
+                  message: "Este campo es requerido",
+                }}
+                control={control}
+                render={({ field }) => (
+                  <ReactSelect
+                    {...field}
+                    isClearable
+                    placeholder="Buscar Unidad"
+                    className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                    options={allUnits}
+                    styles={customStyleWhiteMode}
+                  />
+                )}
+              />
+            ) : (
+              <Controller
+                name="unit_name"
+                isClearable
+                rules={{
+                  required: true,
+                  message: "Este campo es requerido",
+                }}
+                control={control}
+                render={({ field }) => (
+                  <ReactSelect
+                    {...field}
+                    isClearable
+                    placeholder="Buscar Unidad"
+                    className="bg-gray-200 dark:text-gray-900 dark:bg-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                    options={allUnits}
+                    styles={customStylesDarkMode}
+                  />
+                )}
+              />
+            )}
             {errors.unit_name && (
               <span className="text-red-500 text-sm font-bold flex mt-1">
                 Este campo es requerido
