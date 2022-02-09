@@ -55,7 +55,6 @@ const DriverTable = () => {
   const onSearchChange = ({ target }) => {
     setCurrentPage(0);
     setSearch(target.value);
-    console.log(target.value);
   };
 
   const openModalCreateDriver = () => {
