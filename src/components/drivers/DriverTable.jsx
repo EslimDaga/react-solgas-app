@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveDrivers } from "../../store/actions/Drivers";
 import { createDriver, deleteDriver } from "../../service/driver";
+import LoadingDataInTable from "../common/LoadingDataInTable";
 
 const DriverTable = () => {
   const [search, setSearch] = useState("");
@@ -18,7 +19,6 @@ const DriverTable = () => {
     formState: { errors },
   } = useForm();
 
-
   const drivers = useSelector((state) => state.drivers);
   const dispatch = useDispatch();
 
@@ -28,9 +28,9 @@ const DriverTable = () => {
 
   const filteredDrivers = () => {
     if (search.length === 0) {
-      return drivers.slice(currentPage, currentPage + 10);
+      return drivers.drivers.slice(currentPage, currentPage + 10);
     }
-    const filtered = drivers.filter((driver) => {
+    const filtered = drivers.drivers.filter((driver) => {
       return (
         driver.lastname.toLowerCase().includes(search.toLowerCase()) ||
         driver.firstname.toLowerCase().includes(search.toLowerCase()) ||
@@ -41,7 +41,7 @@ const DriverTable = () => {
   }
 
   const nextPage = () => {
-    if (currentPage + 10 < drivers.length) {
+    if (currentPage + 10 < drivers.drivers.length) {
       setCurrentPage(currentPage + 10);
     }
   }
@@ -336,6 +336,11 @@ const DriverTable = () => {
                               filteredDrivers={filteredDrivers}
                               removeDriver={removeDriver}
                             />
+                            {
+                              drivers.loading && (
+                                <LoadingDataInTable />
+                              )
+                            }
                           </div>
                         </div>
                       </div>
