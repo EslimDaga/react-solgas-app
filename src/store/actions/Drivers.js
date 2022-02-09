@@ -1,4 +1,4 @@
-import { GET_DRIVERS, CREATE_DRIVER, DELETE_DRIVER } from "./DriverTypes";
+import { GET_DRIVERS, CREATE_DRIVER, DELETE_DRIVER, SHOW_LOADING } from "./DriverTypes";
 import { createDriver, deleteDriver, getDrivers } from "../../service/driver";
 
 export const addDriver = (dni, firstname, lastname, license_number) => async (dispatch) => {
@@ -15,6 +15,9 @@ export const addDriver = (dni, firstname, lastname, license_number) => async (di
 };
 
 export const retrieveDrivers = () => async (dispatch) => {
+  dispatch({
+    type: SHOW_LOADING,
+  })
   try{
     const res = await getDrivers();
     dispatch({
