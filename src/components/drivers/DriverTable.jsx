@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { retrieveDrivers } from "../../store/actions/Drivers";
 import { createDriver, deleteDriver } from "../../service/driver";
 import LoadingDataInTable from "../common/LoadingDataInTable";
+import { toast, ToastContainer } from "react-toastify";
 
 const DriverTable = () => {
   const [search, setSearch] = useState("");
@@ -69,6 +70,17 @@ const DriverTable = () => {
     createDriver(data).then(() => {
       dispatch(retrieveDrivers());
       closeModalCreateDriver();
+      toast.success("Usuario agregado con éxito", {
+        className: "font-bold",
+        style: { fontFamily: "Quicksand" },
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -331,15 +343,14 @@ const DriverTable = () => {
                       <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
                           <div className="sm:rounded-lg">
-                            <Table
-                              filteredDrivers={filteredDrivers}
-                              removeDriver={removeDriver}
-                            />
-                            {
-                              drivers.loading && (
-                                <LoadingDataInTable />
-                              )
-                            }
+                            {drivers.loading ? (
+                              <LoadingDataInTable />
+                            ) : (
+                              <Table
+                                filteredDrivers={filteredDrivers}
+                                removeDriver={removeDriver}
+                              />
+                            )}
                           </div>
                         </div>
                       </div>
@@ -352,6 +363,7 @@ const DriverTable = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
