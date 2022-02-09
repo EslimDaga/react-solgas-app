@@ -1,14 +1,19 @@
-import { CREATE_DRIVER, DELETE_DRIVER, GET_DRIVERS } from "../actions/DriverTypes";
+import { CREATE_DRIVER, DELETE_DRIVER, GET_DRIVERS, SHOW_LOADING } from "../actions/DriverTypes";
 
-const initialState = [];
+const initialState = {
+  drivers: [],
+  loading: true,
+};
 
 const driverReducer = (drivers = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case CREATE_DRIVER:
       return [...drivers, payload];
+    case SHOW_LOADING:
+      return { ...drivers, loading: true };
     case GET_DRIVERS:
-      return payload;
+      return { ...drivers, drivers: payload, loading: false };
     case DELETE_DRIVER:
       return drivers.filter((driver) => driver.id !== payload);
     default:
