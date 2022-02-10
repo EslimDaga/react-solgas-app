@@ -1,8 +1,9 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import NoResultsFound from "../common/NoResultsFound";
 
-const Table = ({ filteredDrivers, removeDriver }) => {
+const Table = ({ filteredDrivers, removeDriver, search }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -91,6 +92,9 @@ const Table = ({ filteredDrivers, removeDriver }) => {
             </td>
           </tr>
         ))}
+        {search.length > 0 && filteredDrivers().length === 0 ? (
+          <NoResultsFound />
+        ) : null}
       </tbody>
     </table>
   );
