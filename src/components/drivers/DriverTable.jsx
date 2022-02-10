@@ -349,6 +349,7 @@ const DriverTable = () => {
                               <Table
                                 filteredDrivers={filteredDrivers}
                                 removeDriver={removeDriver}
+                                search={search}
                               />
                             )}
                           </div>
