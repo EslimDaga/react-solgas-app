@@ -96,4 +96,20 @@ Eliminar Conductores por su DNI
 
 ### `/control/web/api/delete-driver/<int:dni>/`
 
+### Obtener Unidades
 
+Obtener todas las unidades
+
+### `/control/web/api/get-units/`
+
+### Obtener Unidades por Nº DE PLACA
+
+Obtener unidades por Nº DE PLACA
+
+### `control/web/api/get-unit/<str:license_plate>/`
+
+### Crear Unidades
+
+Crear Unidades
+
+### `/control/web/api/create-unit/`
