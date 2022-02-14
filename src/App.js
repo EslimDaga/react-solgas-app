@@ -8,6 +8,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import PublicRoute from "./components/common/PublicRoute";
 import Checkpoint from "./pages/checkpoint";
 import DriverPage from "./pages/drivers";
+import UnitPage from "./pages/units";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/history" element={<HistoryPage/>}/>
           <Route exact path="/checkpoint" element={<Checkpoint/>}/>
           <Route exact path="/drivers" element={<DriverPage/>}/>
+          <Route exact path="/units" element={<UnitPage />}/>
           <Route exact path="/logout" element={<Logout/>}/>
         </Route>
         <Route path="*" element={<NotFound/>}/>
