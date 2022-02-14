@@ -12,7 +12,6 @@ const UnitTable = () => {
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [showModalCreateUnit, setShowModalCreateUnit] = useState(false);
 
   const units = useSelector((state) => state.units);
   const dispatch = useDispatch();
