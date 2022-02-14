@@ -1,4 +1,4 @@
-import { GET_UNIT, CREATE_UNIT, DELETE_UNIT, SHOW_LOADING } from "./UnitTypes";
+import { GET_UNIT, SHOW_LOADING } from "./UnitTypes";
 import { getUnits } from "../../service/unit";
 
 export const retrieveUnits = () => async (dispatch) => {
