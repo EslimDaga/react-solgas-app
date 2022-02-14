@@ -1,7 +1,6 @@
 import NoResultsFound from "../common/NoResultsFound";
 
 const Table = ({filteredDrivers, search}) => {
-  console.log(filteredDrivers());
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
