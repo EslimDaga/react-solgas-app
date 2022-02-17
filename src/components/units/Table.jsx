@@ -1,6 +1,6 @@
 import NoResultsFound from "../common/NoResultsFound";
 
-const Table = ({filteredDrivers, search}) => {
+const Table = ({ filteredUnits, search }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -44,7 +44,7 @@ const Table = ({filteredDrivers, search}) => {
         </tr>
       </thead>
       <tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
-        {filteredDrivers().map((unit) => (
+        {filteredUnits().map((unit) => (
           <tr key={unit.license_plate}>
             <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
               {unit.license_plate}
@@ -66,12 +66,12 @@ const Table = ({filteredDrivers, search}) => {
             </td>
           </tr>
         ))}
-        {search.length > 0 && filteredDrivers().length === 0 ? (
+        {search.length > 0 && filteredUnits().length === 0 ? (
           <NoResultsFound />
         ) : null}
       </tbody>
     </table>
   );
-}
+};
 
 export default Table;
