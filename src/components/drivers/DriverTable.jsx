@@ -343,15 +343,12 @@ const DriverTable = () => {
                       <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
                           <div className="sm:rounded-lg">
-                            {drivers.loading ? (
-                              <LoadingDataInTable />
-                            ) : (
-                              <Table
-                                filteredDrivers={filteredDrivers}
-                                removeDriver={removeDriver}
-                                search={search}
-                              />
-                            )}
+                            <Table
+                              filteredDrivers={filteredDrivers}
+                              removeDriver={removeDriver}
+                              search={search}
+                            />
+                            {drivers.loading && <LoadingDataInTable />}
                           </div>
                         </div>
                       </div>
