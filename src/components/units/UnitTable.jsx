@@ -20,7 +20,7 @@ const UnitTable = () => {
     dispatch(retrieveUnits());
   }, [dispatch]);
 
-  const filteredDrivers = () => {
+  const filteredUnits = () => {
     if (search.length === 0) {
       return units.units.slice(currentPage, currentPage + 10);
     }
@@ -76,14 +76,11 @@ const UnitTable = () => {
                       <div className="-my-2 overflow-x-auto sm:-mx-3 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-0 lg:px-5">
                           <div className="sm:rounded-lg">
-                            {units.loading ? (
-                              <LoadingDataInTable />
-                            ) : (
-                              <Table
-                                filteredDrivers={filteredDrivers}
-                                search={search}
-                              />
-                            )}
+                            <Table
+                              filteredUnits={filteredUnits}
+                              search={search}
+                            />
+                            {units.loading && <LoadingDataInTable />}
                           </div>
                         </div>
                       </div>
