@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import NoResultsFound from "../common/NoResultsFound";
 import LoadingDataInTable from "../common/LoadingDataInTable";
 
-const Table = ({ filteredDrivers, search, loading }) => {
+const Table = ({ filteredDrivers, handleDelete, search, loading }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -86,7 +86,10 @@ const Table = ({ filteredDrivers, search, loading }) => {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-50 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                       <div className="py-1 bg-gray-100 dark:bg-gray-800">
                         <Menu.Item>
-                          <button className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm">
+                          <button
+                            className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm"
+                            onClick={() => handleDelete(driver.dni)}
+                          >
                             Eliminar
                           </button>
                         </Menu.Item>
