@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import InputSearch from "../common/InputSearch";
 import Table from "./Table";
 import Pagination from "../common/Pagination";
-import { createDriver, getDrivers } from "../../service/driver";
+import { createDriver, deleteDriver, getDrivers } from "../../service/driver";
 import { PlusCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import { toast, ToastContainer } from "react-toastify";
+import Swal from "sweetalert2";
 
 const DriverTable = () => {
 
@@ -14,15 +15,16 @@ const DriverTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [showModalCreateDriver, setShowModalCreateDriver] = useState(false);
   const [drivers, setDrivers] = useState([]);
-  const {register, handleSubmit, formState: {errors}} = useForm();
+  const [updateDrivers, setUpdateDrivers] = useState(false);
+  const {register, handleSubmit, reset, formState: {errors}} = useForm();
 
   useEffect(() => {
     setLoading(true);
-    getDrivers().then(response => {
+    getDrivers().then((response) => {
       setLoading(false);
       setDrivers(response.data);
-    })
-  },[])
+    });
+  }, [updateDrivers]);
 
   const filteredDrivers = () => {
     if(search.length === 0){
@@ -113,8 +115,35 @@ const DriverTable = () => {
         });
         setShowModalCreateDriver(false);
         setDrivers([...drivers, response.data]);
+        reset({
+          dni: "",
+          firstname: "",
+          lastname: "",
+          license_number: "",
+        });
       }
     })
+  }
+
+  const handleDelete = (driver) => {
+    Swal.fire({
+      title: "¿Esta seguro de eliminar este conductor?",
+      text: "Una vez eliminado no podrá recuperarlo",
+      icon: "question",
+      showDenyButton: true,
+      confirmButtonColor: "#1E3A8A",
+      confirmButtonText: "Si, Eliminar",
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        deleteDriver(driver).then(() => {
+          Swal.fire("Conductor Eliminado!", "", "success");
+        });
+        setUpdateDrivers(!updateDrivers);
+      } else if (result.isDenied) {
+        Swal.fire("No se elimino al conductor", "", "info");
+      }
+    });
   }
 
   return (
@@ -366,6 +395,7 @@ const DriverTable = () => {
                           <div className="sm:rounded-lg">
                             <Table
                               filteredDrivers={filteredDrivers}
+                              handleDelete={handleDelete}
                               search={search}
                               loading={loading}
                             />
