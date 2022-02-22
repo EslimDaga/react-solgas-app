@@ -15,6 +15,9 @@ export const getDrivers = async () => {
 export const createDriver = async (data) => {
   const token = cache.getItem("user").token;
   const response = await axios.post(`${api}/control/web/api/create-driver/`, data, {
+    validateStatus: function (status) {
+      return status;
+    },
     headers: {
       "Authorization": `JWT ${token}`
     }
