@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import InputSearch from "../common/InputSearch";
 import Table from "./Table";
@@ -7,8 +7,11 @@ import { createDriver, deleteDriver, getDrivers } from "../../service/driver";
 import { PlusCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
+import { ThemeContext } from "../../store/context/ThemeContext";
 
 const DriverTable = () => {
+
+  const { theme } = useContext(ThemeContext);
 
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -126,24 +129,79 @@ const DriverTable = () => {
   }
 
   const handleDelete = (driver) => {
-    Swal.fire({
-      title: "¿Esta seguro de eliminar este conductor?",
-      text: "Una vez eliminado no podrá recuperarlo",
-      icon: "question",
-      showDenyButton: true,
-      confirmButtonColor: "#1E3A8A",
-      confirmButtonText: "Si, Eliminar",
-    }).then((result) => {
-      console.log(result);
-      if (result.isConfirmed) {
-        deleteDriver(driver).then(() => {
-          Swal.fire("Conductor Eliminado!", "", "success");
-        });
-        setUpdateDrivers(!updateDrivers);
-      } else if (result.isDenied) {
-        Swal.fire("No se elimino al conductor", "", "info");
-      }
-    });
+    if (theme === "dark") {
+      Swal.fire({
+        title: "¿Esta seguro de eliminar este conductor?",
+        text: "Una vez eliminado no podrá recuperarlo",
+        icon: "question",
+        showDenyButton: true,
+        confirmButtonColor: "#1E3A8A",
+        confirmButtonText: "Si, Eliminar",
+        background: "#1F2937",
+        color: "#FFFFFF",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteDriver(driver).then(() => {
+            Swal.fire({
+              title: "Se elimino al conductor",
+              text: "Se elimino al conductor correctamente",
+              icon: "success",
+              confirmButtonColor: "#1E3A8A",
+              confirmButtonText: "Ok",
+              background: "#1F2937",
+              color: "#FFFFFF",
+            });
+          });
+          setUpdateDrivers(!updateDrivers);
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "No se elimino al conductor",
+            text: "No se borro ningun dato",
+            icon: "info",
+            confirmButtonColor: "#1E3A8A",
+            confirmButtonText: "Ok",
+            background: "#1F2937",
+            color: "#FFFFFF",
+          });
+        }
+      });
+    }else{
+      Swal.fire({
+        title: "¿Esta seguro de eliminar este conductor?",
+        text: "Una vez eliminado no podrá recuperarlo",
+        icon: "question",
+        showDenyButton: true,
+        iconColor: "#1E3A8A",
+        confirmButtonColor: "#1E3A8A",
+        confirmButtonText: "Si, Eliminar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteDriver(driver).then(() => {
+            Swal.fire({
+              title: "Se elimino al conductor",
+              text: "Se elimino al conductor correctamente",
+              icon: "success",
+              confirmButtonColor: "#1E3A8A",
+              confirmButtonText: "Ok",
+              background: "#FFFFFF",
+              color: "#000000",
+            });
+          });
+          setUpdateDrivers(!updateDrivers);
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "No se elimino al conductor",
+            text: "No se borro ningun dato",
+            icon: "info",
+            iconColor: "#1E3A8A",
+            confirmButtonColor: "#1E3A8A",
+            confirmButtonText: "Ok",
+            background: "#FFFFFF",
+            color: "#000000",
+          });
+        }
+      });
+    }
   }
 
   return (
