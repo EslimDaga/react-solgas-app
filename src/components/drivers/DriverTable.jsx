@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import InputSearch from "../common/InputSearch";
 import Table from "./Table";
 import Pagination from "../common/Pagination";
-import { getDrivers } from "../../service/driver";
+import { createDriver, getDrivers } from "../../service/driver";
 import { PlusCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
+import { toast, ToastContainer } from "react-toastify";
 
 const DriverTable = () => {
 
@@ -69,7 +70,51 @@ const DriverTable = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
+    createDriver(data).then(response => {
+      if(response.status === 400 && response.data.dni){
+        toast.error("😨 Este dni ya existe", {
+          className: "font-bold",
+          style: { fontFamily: "Quicksand" },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      if(response.status === 400 && response.data.license_number){
+        toast.error("😨 Esta licencia ya existe", {
+          className: "font-bold",
+          style: { fontFamily: "Quicksand" },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      if(response.status === 200){
+        toast.success("😎 El conductor se creó correctamente", {
+          className: "font-bold",
+          style: { fontFamily: "Quicksand" },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setShowModalCreateDriver(false);
+        setDrivers([...drivers, response.data]);
+      }
+    })
   }
 
   return (
@@ -336,6 +381,7 @@ const DriverTable = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
