@@ -109,4 +109,4 @@ const Table = ({ filteredDrivers, handleDelete, search, loading }) => {
   );
 };
 
-export default Table
+export default Table;

@@ -126,4 +126,4 @@ const Table = ({ filteredUnits, search, loading }) => {
   );
 }
 
-export default Table
+export default Table;

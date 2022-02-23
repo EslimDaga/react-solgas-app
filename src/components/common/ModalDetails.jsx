@@ -155,4 +155,4 @@ const ModalDetails = ({ event, closeModal }) => {
   );
 };
 
-export default ModalDetails
+export default ModalDetails;

@@ -118,4 +118,4 @@ const ModalImages = ({event, closeModalImages}) => {
   );
 }
 
-export default ModalImages
+export default ModalImages;

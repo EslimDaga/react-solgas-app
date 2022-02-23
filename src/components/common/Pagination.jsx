@@ -17,4 +17,4 @@ const Pagination = ({ prevPage, nextPage }) => {
   );
 };
 
-export default Pagination
+export default Pagination;

@@ -11,4 +11,4 @@ const PublicRoute = () => {
   return isAuth ? <Navigate to="/events" /> : <Outlet />;
 }
 
-export default PublicRoute
+export default PublicRoute;
