@@ -15,6 +15,9 @@ export const getUnits = async () => {
 export const createUnit = async (data) => {
   const token = cache.getItem("user").token;
   const response = await axios.post(`${api}/control/web/api/create-unit/`, data, {
+    validateStatus: function (status) {
+      return status;
+    },
     headers: {
       "Authorization": `JWT ${token}`
     }
