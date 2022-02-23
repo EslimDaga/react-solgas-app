@@ -1,20 +1,25 @@
 import { ExclamationCircleIcon, PlusCircleIcon } from "@heroicons/react/solid";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
-import { getUnits, createUnit } from "../../service/unit";
+import Swal from "sweetalert2";
+import { getUnits, createUnit, deleteUnit } from "../../service/unit";
+import { ThemeContext } from "../../store/context/ThemeContext";
 import InputSearch from "../common/InputSearch";
 import Pagination from "../common/Pagination";
 import Table from "./Table";
 
 const UnitTable = () => {
 
+  const { theme } = useContext(ThemeContext);
+
   const [loading, setLoading] = useState(false);
   const [units, setUnits] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [showModalCreateUnit, setShowModalCreateUnit] = useState(false);
   const [search, setSearch] = useState("");
+  const [updateUnits, setUpdateUnits] = useState(false);
   const {register, handleSubmit, reset, formState: {errors}} = useForm();
 
   useEffect(() => {
@@ -23,7 +28,7 @@ const UnitTable = () => {
       setLoading(false);
       setUnits(response.data);
     })
-  },[]);
+  },[updateUnits]);
 
   const filteredDrivers = () => {
     if (search.length === 0) {
@@ -113,6 +118,82 @@ const UnitTable = () => {
         });
       }
     });
+  }
+
+  const handleDeleteUnit = (license_plate) => {
+    if (theme === "dark") {
+      Swal.fire({
+        title: "¿Esta seguro de eliminar este conductor?",
+        text: "Una vez eliminado no podrá recuperarlo",
+        icon: "question",
+        showDenyButton: true,
+        confirmButtonColor: "#1E3A8A",
+        confirmButtonText: "Si, Eliminar",
+        background: "#1F2937",
+        color: "#FFFFFF",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteUnit(license_plate).then(() => {
+            Swal.fire({
+              title: "Se elimino la unidad",
+              text: "Se elimino la unidad correctamente",
+              icon: "success",
+              confirmButtonColor: "#1E3A8A",
+              confirmButtonText: "Ok",
+              background: "#1F2937",
+              color: "#FFFFFF",
+            });
+          });
+          setUpdateUnits(!updateUnits);
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "No se elimino la unidad",
+            text: "No se borro ningun dato",
+            icon: "info",
+            confirmButtonColor: "#1E3A8A",
+            confirmButtonText: "Ok",
+            background: "#1F2937",
+            color: "#FFFFFF",
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "¿Esta seguro de eliminar este conductor?",
+        text: "Una vez eliminado no podrá recuperarlo",
+        icon: "question",
+        showDenyButton: true,
+        iconColor: "#1E3A8A",
+        confirmButtonColor: "#1E3A8A",
+        confirmButtonText: "Si, Eliminar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteUnit(license_plate).then(() => {
+            Swal.fire({
+              title: "Se elimino la unidad",
+              text: "Se elimino la unidad correctamente",
+              icon: "success",
+              confirmButtonColor: "#1E3A8A",
+              confirmButtonText: "Ok",
+              background: "#FFFFFF",
+              color: "#000000",
+            });
+          });
+          setUpdateUnits(!updateUnits);
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: "No se elimino al conductor",
+            text: "No se borro ningun dato",
+            icon: "info",
+            iconColor: "#1E3A8A",
+            confirmButtonColor: "#1E3A8A",
+            confirmButtonText: "Ok",
+            background: "#FFFFFF",
+            color: "#000000",
+          });
+        }
+      });
+    }
   }
 
   return (
@@ -344,6 +425,7 @@ const UnitTable = () => {
                               filteredUnits={filteredDrivers}
                               search={search}
                               loading={loading}
+                              handleDeleteUnit={handleDeleteUnit}
                             />
                           </div>
                         </div>
