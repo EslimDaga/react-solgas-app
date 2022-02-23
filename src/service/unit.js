@@ -19,7 +19,17 @@ export const createUnit = async (data) => {
       return status;
     },
     headers: {
-      "Authorization": `JWT ${token}`
+      "Authorization": `JWT ${token}`,
+    }
+  });
+  return response;
+}
+
+export const deleteUnit = async (license_plate) => {
+  const token = cache.getItem("user").token;
+  const response = await axios.delete(`${api}/control/web/api/delete-unit/${license_plate}/`,{
+    headers: {
+      "Authorization": `JWT ${token}`,
     }
   });
   return response;
