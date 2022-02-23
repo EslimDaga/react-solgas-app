@@ -2,7 +2,8 @@ import { ExclamationCircleIcon, PlusCircleIcon } from "@heroicons/react/solid";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { getUnits } from "../../service/unit";
+import { toast, ToastContainer } from "react-toastify";
+import { getUnits, createUnit } from "../../service/unit";
 import InputSearch from "../common/InputSearch";
 import Pagination from "../common/Pagination";
 import Table from "./Table";
@@ -14,7 +15,7 @@ const UnitTable = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [showModalCreateUnit, setShowModalCreateUnit] = useState(false);
   const [search, setSearch] = useState("");
-  const {register, handleSubmit, formState: {errors}} = useForm();
+  const {register, handleSubmit, reset, formState: {errors}} = useForm();
 
   useEffect(() => {
     setLoading(true);
@@ -75,7 +76,43 @@ const UnitTable = () => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    createUnit(data).then((response) => {
+      if(response.status === 400 && response.data.license_plate){
+        toast.error("😨 Esta unidad ya existe", {
+          className: "font-bold",
+          style: { fontFamily: "Quicksand" },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+
+      if(response.status === 200){
+        toast.success("😎 La unidad se creó correctamente", {
+          className: "font-bold",
+          style: { fontFamily: "Quicksand" },
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setShowModalCreateUnit(false);
+        setUnits([...units, response.data]);
+        reset({
+          license_plate: "",
+          logistic_operator: "",
+          provider: "",
+          service_type: "",
+        });
+      }
+    });
   }
 
   return (
@@ -320,6 +357,7 @@ const UnitTable = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
