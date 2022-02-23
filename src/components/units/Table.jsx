@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import LoadingDataInTable from "../common/LoadingDataInTable";
 import NoResultsFound from "../common/NoResultsFound";
 
-const Table = ({ filteredUnits, search, loading }) => {
+const Table = ({ filteredUnits, search, loading, handleDeleteUnit }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -106,6 +106,7 @@ const Table = ({ filteredUnits, search, loading }) => {
                         <Menu.Item>
                           <button
                             className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 w-full block px-4 py-2 text-sm"
+                            onClick={() => handleDeleteUnit(unit.license_plate)}
                           >
                             Eliminar
                           </button>
@@ -124,6 +125,6 @@ const Table = ({ filteredUnits, search, loading }) => {
       </tbody>
     </table>
   );
-}
+};
 
 export default Table;
