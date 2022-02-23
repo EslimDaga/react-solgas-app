@@ -113,3 +113,9 @@ Obtener unidades por Nº DE PLACA
 Crear Unidades
 
 ### `/control/web/api/create-unit/`
+
+### Eliminar Unidades
+
+Eliminar Unidad
+
+### `/control/web/api/delete-unit/<str:license_plate>/`
