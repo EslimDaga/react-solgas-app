@@ -3,7 +3,7 @@ import { TrashIcon } from "@heroicons/react/solid";
 import LoadingDataInTable from "../common/LoadingDataInTable";
 import NoResultsFound from "../common/NoResultsFound";
 
-const Table = ({ filteredUnits, search, loading, handleDeleteUnit }) => {
+const Table = ({ filteredUnits, search, loading, handleDeleteUnit, is_staff }) => {
   return (
     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead className="bg-blue-900 dark:bg-gray-900">
@@ -84,7 +84,8 @@ const Table = ({ filteredUnits, search, loading, handleDeleteUnit }) => {
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <button
-                      className="inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-gray-800 shadow-sm px-4 py-2 bg-red-600 dark:bg-red-600 text-sm font-bold text-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800 focus:ring-red-900"
+                      disabled={!is_staff}
+                      className={`inline-flex justify-center w-full rounded-md border border-gray-300 dark:border-gray-800 shadow-sm px-4 py-2 bg-red-600 dark:bg-red-600 text-sm font-bold text-gray-100 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-800 focus:ring-red-900` + (!is_staff ? " opacity-50 cursor-not-allowed" : "")}
                       onClick={() => handleDeleteUnit(unit.license_plate)}
                     >
                       Eliminar

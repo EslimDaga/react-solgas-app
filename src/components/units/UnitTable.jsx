@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
+import cache from "../../helpers/cache";
 import { getUnits, createUnit, deleteUnit } from "../../service/unit";
 import { ThemeContext } from "../../store/context/ThemeContext";
 import InputSearch from "../common/InputSearch";
@@ -13,6 +14,7 @@ import Table from "./Table";
 const UnitTable = () => {
 
   const { theme } = useContext(ThemeContext);
+  const is_staff = cache.getItem("user").is_staff;
 
   const [loading, setLoading] = useState(false);
   const [units, setUnits] = useState([]);
@@ -426,6 +428,7 @@ const UnitTable = () => {
                               search={search}
                               loading={loading}
                               handleDeleteUnit={handleDeleteUnit}
+                              is_staff={is_staff}
                             />
                           </div>
                         </div>
