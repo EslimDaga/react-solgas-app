@@ -72,6 +72,11 @@ const CheckpointTable = () => {
 
   const closeModalCreateCheckpoint = () => {
     setShowModalCreateCheckpoint(false);
+    setIsLoading(true);
+    getCheckpoints().then(checkpoints => {
+      setIsLoading(false);
+      setCheckpoints(checkpoints);
+    });
   }
 
   const openModalViewCheckpoint = (name, state) => {
