@@ -31,6 +31,7 @@ const CheckpointTable = () => {
   const [showModalViewCheckpoint, setShowModalViewCheckpoint] = useState(false);
 
   const token = cache.getItem("user").token;
+  const is_staff = cache.getItem("user").is_staff;
 
   useEffect(() => {
     getCheckpoints().then(checkpoints => {
@@ -119,8 +120,14 @@ const CheckpointTable = () => {
                     label="Buscar por Nombre"
                   />
                   <button
-                    className="w-full sm:w-2/4 md:w-1/4 lg:w-56 sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900"
+                    className={
+                      `w-full sm:w-2/4 md:w-1/4 lg:w-56 sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900` +
+                      (!is_staff
+                        ? " opacity-50 cursor-not-allowed"
+                        : "")
+                    }
                     onClick={openModalCreateCheckpoint}
+                    disabled={!is_staff}
                   >
                     <PlusCircleIcon className="w-5 h-5 mr-2" />
                     Agregar Checkpoint
@@ -136,6 +143,7 @@ const CheckpointTable = () => {
                               filteredCheckpoints={filteredCheckpoints}
                               openModalViewCheckpoint={openModalViewCheckpoint}
                               search={search}
+                              is_staff={is_staff}
                             />
                             {isLoading && <LoadingDataInTable />}
                           </div>
@@ -145,7 +153,7 @@ const CheckpointTable = () => {
                   </div>
                 </div>
               </div>
-              <Pagination prevPage={prevPage} nextPage={nextPage}/>
+              <Pagination prevPage={prevPage} nextPage={nextPage} />
             </section>
           </div>
         </div>
