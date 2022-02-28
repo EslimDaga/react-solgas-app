@@ -8,10 +8,13 @@ import { PlusCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
 import { ThemeContext } from "../../store/context/ThemeContext";
+import cache from "../../helpers/cache";
 
 const DriverTable = () => {
 
   const { theme } = useContext(ThemeContext);
+
+  const is_staff = cache.getItem("user").is_staff;
 
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -456,6 +459,7 @@ const DriverTable = () => {
                               handleDelete={handleDelete}
                               search={search}
                               loading={loading}
+                              is_staff={is_staff}
                             />
                           </div>
                         </div>
