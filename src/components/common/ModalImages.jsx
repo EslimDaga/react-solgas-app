@@ -1,11 +1,45 @@
+import { css, Global } from "@emotion/react";
+import { render } from "@testing-library/react";
 import { Carousel } from "react-responsive-carousel";
 import { api } from "../../constants/global";
+
+render(
+  <Global
+    styles={css`
+      .carousel.carousel-slider {
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+        width: 100% !important;
+      }
+      .carousel .slider-wrapper {
+        overflow: hidden;
+        height: 70vh !important;
+        display: contents;
+        margin: auto;
+        width: 100%;
+        transition: height 0.15s ease-in;
+      }
+      .carousel .slide img {
+        width: 70% !important;
+        vertical-align: top;
+        border: 0;
+      }
+      .carousel .control-next.control-arrow:before {
+        border-left: 8px solid #111827 !important;
+      }
+      .carousel .control-prev.control-arrow:before {
+        border-right: 8px solid #111827 !important;
+      }
+    `}
+  />
+);
 
 const ModalImages = ({event, closeModalImages}) => {
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        <div className="relative w-full my-6 mx-auto max-w-lg">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white dark:bg-gray-700 outline-none focus:outline-none">
             <div className="flex items-start justify-between p-3 border-solid border-blueGray-200 rounded-t">
               <h3 className="text-1xl font-semibold self-center dark:text-gray-100">
@@ -20,15 +54,10 @@ const ModalImages = ({event, closeModalImages}) => {
                 </span>
               </button>
             </div>
-            <div className="relative flex-auto">
-              <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-lg flex">
+            <div className="">
+              <div className=" bg-gray-100 dark:bg-gray-700 rounded-lg">
                 <div className="bg-white dark:bg-gray-700 rounded-lg shadow-sm">
-                  <Carousel
-                    autoPlay
-                    width={500}
-                    dynamicHeight={20}
-                    thumbWidth={35}
-                  >
+                  <Carousel dynamicHeight={20} thumbWidth={35}>
                     <div>
                       <img
                         src={api + JSON.parse(event.images).url1}
