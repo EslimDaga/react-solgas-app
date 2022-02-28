@@ -1,6 +1,5 @@
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon, TrashIcon } from "@heroicons/react/solid";
+import { Menu } from "@headlessui/react";
+import { TrashIcon } from "@heroicons/react/solid";
 import NoResultsFound from "../common/NoResultsFound";
 import LoadingDataInTable from "../common/LoadingDataInTable";
 
