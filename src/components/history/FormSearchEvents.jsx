@@ -132,7 +132,7 @@ const FormSearchEvents = ({
                     {...field}
                     isClearable
                     placeholder="Buscar Unidad"
-                    className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                    className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-1 focus:shadow focus:outline-none font-bold"
                     options={allUnits}
                     styles={customStyleWhiteMode}
                   />
@@ -152,7 +152,7 @@ const FormSearchEvents = ({
                     {...field}
                     isClearable
                     placeholder="Buscar Unidad"
-                    className="bg-gray-200 dark:text-gray-900 dark:bg-gray-900 w-full rounded-lg z-0 focus:shadow focus:outline-none font-bold"
+                    className="bg-gray-200 dark:text-gray-900 dark:bg-gray-900 w-full rounded-lg z-1 focus:shadow focus:outline-none font-bold"
                     options={allUnits}
                     styles={customStylesDarkMode}
                   />
@@ -168,7 +168,7 @@ const FormSearchEvents = ({
         </div>
         <div
           className={
-            `flex text-center self-center lg:ml-2 sm:mt-4 lg:mt-8` +
+            `flex text-center self-center mt-2 lg:ml-2 sm:mt-4 lg:mt-8` +
             (errors.initial_date || errors.final_date || errors.unit_name
               ? " self-center lg:mt-2"
               : "")
