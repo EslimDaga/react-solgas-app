@@ -184,7 +184,7 @@ const FormSearchEvents = ({
             type="submit"
             style={{ transition: "all .15s ease" }}
           >
-            <div className="inline-flex items-center">Enviar</div>
+            <div className="inline-flex items-center">Buscar</div>
           </button>
           <button
             disabled={searchEvents.length === 0 ? true : false}
