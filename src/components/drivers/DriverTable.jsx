@@ -431,14 +431,14 @@ const DriverTable = () => {
           <div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
             <section className="antialiased text-gray-600 w-full">
               <div className="flex flex-col justify-center">
-                <div className="items-center pb-3 flex sm:flex lg:flex justify-between">
+                <div className="items-center pb-3 sm:flex md:flex lg:flex justify-between">
                   <InputSearch
                     label="Buscar"
                     search={search}
                     onSearchChange={onSearchChange}
                   />
                   <button
-                    className="sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900"
+                    className="w-full sm:w-2/4 md:w-1/4 lg:w-56 sm:ml-0 sm:mt-1 lg:ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-blue-900"
                     onClick={openModalCreateDriver}
                   >
                     <PlusCircleIcon className="w-5 h-5 mr-2" />
