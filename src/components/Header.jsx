@@ -37,13 +37,13 @@ const Header = () => {
   return (
     <Popover className="bg-slate-50 dark:bg-slate-900 mt-0 fixed w-full z-10 top-0">
       <div className="mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
+        <div className="flex justify-between items-center py-6 md:justify-between md:space-x-10">
+          <div className="flex sm:flex md:flex lg:flex justify-between sm:justify-between md:justify-between lg:justify-between lg:w-0 lg:flex-1">
             <Link to="/login">
               {theme === "light" ? <LogoHeader /> : <LogoHeaderDark />}
             </Link>
           </div>
-          <div className="-mr-2 -my-2 md:hidden">
+          <div className="-mr-2 -my-2 md:flex lg:hidden">
             <div className="flex">
               <Toggle />
               <Popover.Button className="bg-white dark:bg-gray-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 dark:text-gray-100 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-700">
@@ -51,7 +51,7 @@ const Header = () => {
               </Popover.Button>
             </div>
           </div>
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+          <div className="hidden md:hidden lg:flex items-center justify-end md:flex-1 lg:w-0">
             {theme === "light" ? (
               <Popover.Group as="nav" className="hidden md:flex space-x-1">
                 {navItems.map((item) => (
@@ -101,7 +101,7 @@ const Header = () => {
       >
         <Popover.Panel
           focus
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right lg:hidden"
         >
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white dark:bg-gray-900 divide-y-2 divide-gray-50 dark:divide-gray-700">
             <div className="pt-5 pb-6 px-5">
@@ -118,29 +118,27 @@ const Header = () => {
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                {theme === "light" ? (
-                  navItems.map((item) => (
-                    <NavLink
-                      key={item.path}
-                      end
-                      to={`/${item.path}`}
-                      className="text-base font-medium text-gray-400 hover:text-gray-900 px-2 py-2 rounded-md"
-                    >
-                      {item.title}
-                    </NavLink>
-                  ))
-                ) : (
-                  navItems.map((item) => (
-                    <NavLink
-                      key={item.path}
-                      end
-                      to={`/${item.path}`}
-                      className="text-base font-medium text-gray-400 hover:text-gray-100 px-2 py-2 rounded-md"
-                    >
-                      {item.title}
-                    </NavLink>
-                  ))
-                )}
+                {theme === "light"
+                  ? navItems.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        end
+                        to={`/${item.path}`}
+                        className="text-base font-medium text-gray-400 hover:text-gray-900 px-2 py-2 rounded-md"
+                      >
+                        {item.title}
+                      </NavLink>
+                    ))
+                  : navItems.map((item) => (
+                      <NavLink
+                        key={item.path}
+                        end
+                        to={`/${item.path}`}
+                        className="text-base font-medium text-gray-400 hover:text-gray-100 px-2 py-2 rounded-md"
+                      >
+                        {item.title}
+                      </NavLink>
+                    ))}
               </div>
               <div>
                 <Link
