@@ -118,16 +118,29 @@ const Header = () => {
             </div>
             <div className="py-6 px-5 space-y-6">
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                {navItems.map((item) => (
-                  <NavLink
-                    key={item.path}
-                    end
-                    to={`/${item.path}`}
-                    className="text-base font-medium text-gray-500 dark:text-gray-100 hover:text-gray-100 px-2 py-2 rounded-md"
-                  >
-                    {item.title}
-                  </NavLink>
-                ))}
+                {theme === "light" ? (
+                  navItems.map((item) => (
+                    <NavLink
+                      key={item.path}
+                      end
+                      to={`/${item.path}`}
+                      className="text-base font-medium text-gray-400 hover:text-gray-900 px-2 py-2 rounded-md"
+                    >
+                      {item.title}
+                    </NavLink>
+                  ))
+                ) : (
+                  navItems.map((item) => (
+                    <NavLink
+                      key={item.path}
+                      end
+                      to={`/${item.path}`}
+                      className="text-base font-medium text-gray-400 hover:text-gray-100 px-2 py-2 rounded-md"
+                    >
+                      {item.title}
+                    </NavLink>
+                  ))
+                )}
               </div>
               <div>
                 <Link
