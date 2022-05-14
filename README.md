@@ -1,121 +1,59 @@
-# ✅ Checkpoint Solgas - Segursat ☢️
+# Solgas App ☢️
 
-Este proyecto contiene un API con las siguientes rutas :
+This is a my personal project "Solgas App" using a private API, prepared by the company in which i am working 🛰
 
-## URL 🚀
+![](./src/assets/images/present_mobile.jpg)
 
-A continuación se redactará las rutas de la App
+## Installation and Setup Instructions 💻
 
-### Panel de Administración
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
-Control total de la aplicación
+Installation:
 
-### `/admin`
+`npm install`
 
-### Obtener Token
+To Start Server:
 
-Obtener token JWT Authentication
+`npm start`
 
-### `/token/obtain/`
+To Visit App:
 
-### Refrescar Token
+`localhost:3000`
 
-Refrescar token JWT Authentication
+## Table of contents 📄
 
-### `/token/refresh/`
+- [Solgas App](#solgas-app-☢️)
+  - [Installation](#installation-and-setup-instructions-💻)
+  - [Table of contents](#table-of-contents-📄)
+  - [Overview](#overview-🧩)
+    - [Screenshot](#screenshot)
+    - [Links](#links-🔗)
+  - [My process](#my-process-📄)
+    - [Built with](#built-with)
+  - [Author](#author-👨🏻‍💻)
 
-### Mostrar Eventos
+## Overview 🧩
+### Screenshot
 
-Obtener todos los eventos
+![](./src/assets/images/solgas.netlify.app_login%20(1).png)
 
-### `/control/web/api/get-events/`
+![](./src/assets/images/macbook_white.jpg)
 
-### Mostrar Eventos por su ID
+![](./src/assets/images/macbook_dark.jpg)
 
-Obtener un evento por ID
+### Links 🔗
 
-### `/control/web/api/get-event/<int:id>/`
+- Solution URL: [https://github.com/EslimDaga/react-solgas-app](https://github.com/EslimDaga/react-solgas-app)
+- Live Site URL: [https://solgas.netlify.app/](https://solgas.netlify.app/)
 
-### Buscar Eventos
+## My process 📄
 
-Buscar eventos con un rango de fecha
+### Built with
 
-### `/control/web/api/search-events/<str:initial_date>/<str:final_date>/<str:license_plate>/`
+- [React](https://reactjs.org/) - JS library
+- [Tailwind ](https://tailwindcss.com/) - CSS framework
 
-### Imprimir Eventos
+## Author 👨🏻‍💻
 
-Imprimir eventos con un rango de fecha
-
-### `/control/web/api/print-events/<str:initial_date>/<str:final_date>/<str:license_plate>/`
-
-### Mostrar Checkpoints
-
-Mostrar checkpoints
-
-### `/control/web/api/get-checkpoints/`
-
-### Mostrar Checkpoints por NAME
-
-Mostrar checkpoints por NAME
-
-### `/control/web/api/get-checkpoint/<str:name>/`
-
-### Eliminar Checkpoints por NAME
-
-Eliminar checkpoints por NAME
-
-### `/control/web/api/delete-checkpoint/<str:name>/`
-
-### Crear Checkpoints
-
-Crear checkpoints
-
-### `/control/web/api/create-checkpoint/`
-
-### Mostrar Conductores
-
-Mostrar todos los conductores
-
-### `/control/web/api/get-drivers/`
-
-### Mostrar conductor por DNI
-
-Mostrar conductor por su DNI
-
-### `/control/web/api/get-driver/<int:dni>/`
-
-### Crear conductores
-
-Crear Conductores
-
-### `/control/web/api/create-driver/`
-
-### Eliminar Conductores por DNI
-
-Eliminar Conductores por su DNI
-
-### `/control/web/api/delete-driver/<int:dni>/`
-
-### Obtener Unidades
-
-Obtener todas las unidades
-
-### `/control/web/api/get-units/`
-
-### Obtener Unidades por Nº DE PLACA
-
-Obtener unidades por Nº DE PLACA
-
-### `control/web/api/get-unit/<str:license_plate>/`
-
-### Crear Unidades
-
-Crear Unidades
-
-### `/control/web/api/create-unit/`
-
-### Eliminar Unidades
-
-Eliminar Unidad
-
-### `/control/web/api/delete-unit/<str:license_plate>/`
+- Frontend Mentor - [@eslimdaga](https://www.frontendmentor.io/profile/eslimdaga)
+- Twitter - [@eslimdaga](https://www.twitter.com/eslimdaga)
