@@ -143,6 +143,21 @@ const ModalDetails = ({ event, closeModal }) => {
                         </div>
                       </div>
                     </div>
+                    <div className="flex flex-col sm:mt-0 gap-7 text-sm">
+                      <div className="bg-blue-900 flex justify-between items-center p-3 rounded-md shadow-sm">
+                        <div className="flex justify-start items-center gap-2">
+                          <BadgeCheckIcon className="h-8 w-8 text-yellow-500" />
+                          <div>
+                            <p className="text-white font-bold tracking-wider">
+                              Tiempo de Juego
+                            </p>
+                            <p className="text-white font-bold">
+                              {event.game_time} Segundos
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
