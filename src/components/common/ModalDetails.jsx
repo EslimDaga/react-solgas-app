@@ -1,5 +1,5 @@
-import { BadgeCheckIcon } from '@heroicons/react/solid';
-import { Duration } from 'luxon';
+import { BadgeCheckIcon } from "@heroicons/react/solid";
+import { Duration } from "luxon";
 
 const ModalDetails = ({ event, closeModal }) => {
 	let duration_game;
@@ -9,7 +9,7 @@ const ModalDetails = ({ event, closeModal }) => {
 		duration_game = event.game_time;
 	} else {
 		duration_game = Duration.fromObject({ seconds: event.game_time }).as(
-			'minutes'
+			"minutes"
 		);
 	}
 
@@ -17,7 +17,7 @@ const ModalDetails = ({ event, closeModal }) => {
 		duration_in_app = event.duration_time;
 	} else {
 		duration_in_app = Duration.fromObject({ seconds: event.duration_time }).as(
-			'minutes'
+			"minutes"
 		);
 	}
 
