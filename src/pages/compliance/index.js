@@ -1,63 +1,107 @@
-import { useContext, useEffect, useState } from "react";
-import ReactDatePicker from "react-datepicker";
+import { useEffect, useState } from "react";
+import moment from "moment";
 import { Helmet } from "react-helmet";
-import { Controller, useForm } from "react-hook-form";
-import ReactSelect from "react-select";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import Favicon from "../../assets/images/ico-solgas.png";
 import Breadcrumb from "../../components/common/Breadcrumb";
-import InputSearch from "../../components/common/InputSearch";
 import Header from "../../components/Header";
-import { getUnits } from "../../service/history";
-import { ThemeContext } from "../../store/context/ThemeContext";
+import { getSearchEventsWithGrouping } from "../../service/history";
+import exportFromJSON from "export-from-json";
+import ComplianceTable from "../../components/compliance/ComplianceTable";
 
 const Compliance = () => {
-	const [allUnits, setAllUnits] = useState([]);
+	const [searchEvents, setSearchEvents] = useState([]);
+	const [currentPage, setCurrentPage] = useState(0);
+	const [search, setSearch] = useState("");
+	const [printEvents, setPrintEvents] = useState([]);
+	const [nameFile, setNameFile] = useState("");
+	const [loading, setLoading] = useState(false);
 	const {
+		handleSubmit,
 		formState: { errors },
 		control,
 	} = useForm();
 
-	const { theme } = useContext(ThemeContext);
+	useEffect(() => {}, []);
 
-	useEffect(() => {
-		getUnits().then(units => {
-			const optionAllUnits = [{ value: "ALL", label: "Todos" }];
-			const optionsUnits = units.map(unit => ({
-				value: unit.license_plate,
-				label: unit.license_plate,
-			}));
-			const total = optionAllUnits.concat(optionsUnits);
-			setAllUnits(total);
-		});
-	}, []);
-
-	const customStyleWhiteMode = {
-		control: (provided, state) => ({
-			...provided,
-			background: "#E5E7EB",
-			borderRadius: "0.5rem",
-			borderColor: state.isFocused ? "#E5E7EB" : "#E5E7EB",
-			minHeight: state.isSelected ? "56px" : "56px",
-		}),
+	const filteredEvents = () => {
+		if (search.length === 0) {
+			return searchEvents.slice(currentPage, currentPage + 10);
+		}
+		const filtered = searchEvents.filter(eve =>
+			eve.unit_name.toLowerCase().includes(search)
+		);
+		return filtered.slice(currentPage, currentPage + 10);
 	};
 
-	const customStylesDarkMode = {
-		control: (provided, state) => ({
-			...provided,
-			background: "#374151",
-			borderRadius: "0.5rem",
-			borderColor: "#374151",
-			color: state.isSelected ? "#fff" : "#fff",
-			minHeight: state.isSelected ? "56px" : "56px",
-		}),
-		singleValue: (provided, state) => ({
-			...provided,
-			color: state.isSelected ? "#fff" : "#fff",
-		}),
-		placeholder: (provided, state) => ({
-			...provided,
-			color: state.isSelected ? "#fff" : "#fff",
-		}),
+	const nextPage = () => {
+		if (
+			searchEvents.filter(eve => eve.unit_name.toLowerCase().includes(search))
+				.length >
+			currentPage + 10
+		) {
+			setCurrentPage(currentPage + 10);
+		}
+	};
+
+	const prevPage = () => {
+		if (currentPage > 0) {
+			setCurrentPage(currentPage - 10);
+		}
+	};
+
+	const onSearchChange = ({ target }) => {
+		setCurrentPage(0);
+		setSearch(target.value);
+	};
+
+	const onSubmitForm = async data => {
+		setSearchEvents([]);
+		setLoading(true);
+		const initial_date_value = moment(data.initial_date).format("YYYY-MM-DD");
+		const final_date_value = moment(data.final_date).format("YYYY-MM-DD");
+		await getSearchEventsWithGrouping(
+			initial_date_value,
+			final_date_value
+		).then(events => {
+			const print_events = events.map(event => {
+				return {
+					Checkpoint: event.checkpoint,
+					"Operador Logistico": event.logistic_operator,
+					Placa: event.unit_name,
+					Cantidad: event.count,
+				};
+			});
+
+			if (events.length === 0) {
+				toast.error("🧐 No se hay resutados", {
+					className: "font-bold",
+					style: { fontFamily: "Quicksand" },
+					position: "top-center",
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				});
+			}
+			setSearchEvents(events);
+			setLoading(false);
+			setPrintEvents(print_events);
+			setNameFile(
+				`Reporte de eventos desde ${initial_date_value} hasta ${final_date_value}`
+			);
+		});
+	};
+
+	const data = printEvents;
+	const fileName = nameFile;
+	const exportType = "xls";
+
+	const ExportToExcel = () => {
+		exportFromJSON({ data, fileName, exportType });
 	};
 
 	return (
@@ -68,181 +112,20 @@ const Compliance = () => {
 			</Helmet>
 			<Header />
 			<Breadcrumb title="Reporte de Cumplimiento" url="/compliance" />
-			<div className="bg-white dark:bg-gray-800">
-				<div className="pt-1">
-					<div className="mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-full lg:px-6">
-						<section className="antialiased text-gray-600 dark:text-gray-100 w-full">
-							<div className="flex flex-col justify-center">
-								<div className="items-center pb-3 sm:relative lg:flex justify-between">
-									<form className="mx-1 lg:flex">
-										<div className="relative w-full md:w-full sm:mb-2">
-											<label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 ml-2">
-												Fecha Inicial
-											</label>
-											<div className="relative">
-												<Controller
-													as={ReactDatePicker}
-													control={control}
-													valueName="selected"
-													onChange={([selected]) => selected}
-													name="initial_date"
-													className="input"
-													rules={{
-														required: true,
-													}}
-													render={({ field }) => (
-														<ReactDatePicker
-															className="bg-gray-200 dark:bg-gray-700 dark:placeholder:text-gray-100 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-															selected={field.value}
-															//onChange={(date) => setStartDate(date)}
-															onChange={date => field.onChange(date)}
-															placeholderText="Seleccionar Fecha"
-														/>
-													)}
-												/>
-												{errors.initial_date && (
-													<span className="text-red-500 text-sm font-bold flex mt-1">
-														Este campo es requerido
-													</span>
-												)}
-											</div>
-										</div>
-										<div className="relative w-full md:w-full sm:mb-2">
-											<label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 lg:ml-2">
-												Fecha Final
-											</label>
-											<div className="relative lg:ml-2">
-												<Controller
-													control={control}
-													valueName="selected"
-													onChange={([selected]) => selected}
-													name="final_date"
-													className="input"
-													rules={{
-														required: true,
-													}}
-													render={({ field }) => (
-														<ReactDatePicker
-															className="bg-gray-200 dark:bg-gray-700 dark:placeholder:text-gray-100 h-14 w-full pl-4 rounded-lg z-0 focus:shadow focus:outline-none font-bold"
-															selected={field.value}
-															onChange={date => field.onChange(date)}
-															placeholderText="Seleccionar Fecha"
-														/>
-													)}
-												/>
-												{errors.final_date && (
-													<span className="text-red-500 text-sm font-bold flex mt-1">
-														Este campo es requerido
-													</span>
-												)}
-											</div>
-										</div>
-										<div className="relative w-full md:w-full">
-											<label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 lg:ml-2">
-												Unidades
-											</label>
-											<div className="relative lg:ml-2">
-												{theme === "light" ? (
-													<Controller
-														name="unit_name"
-														isClearable
-														rules={{
-															required: true,
-															message: "Este campo es requerido",
-														}}
-														control={control}
-														render={({ field }) => (
-															<ReactSelect
-																{...field}
-																isClearable
-																placeholder="Buscar Unidad"
-																className="bg-gray-200 dark:text-gray-900 w-full rounded-lg z-1 focus:shadow focus:outline-none font-bold"
-																options={allUnits}
-																styles={customStyleWhiteMode}
-															/>
-														)}
-													/>
-												) : (
-													<Controller
-														name="unit_name"
-														isClearable
-														rules={{
-															required: true,
-															message: "Este campo es requerido",
-														}}
-														control={control}
-														render={({ field }) => (
-															<ReactSelect
-																{...field}
-																isClearable
-																placeholder="Buscar Unidad"
-																className="bg-gray-200 dark:text-gray-900 dark:bg-gray-900 w-full rounded-lg z-1 focus:shadow focus:outline-none font-bold"
-																options={allUnits}
-																styles={customStylesDarkMode}
-															/>
-														)}
-													/>
-												)}
-												{errors.unit_name && (
-													<span className="text-red-500 text-sm font-bold flex mt-1">
-														Este campo es requerido
-													</span>
-												)}
-											</div>
-										</div>
-										<div
-											className={
-												`flex text-center self-center mt-2 lg:ml-2 sm:mt-4 lg:mt-8` +
-												(errors.initial_date ||
-												errors.final_date ||
-												errors.unit_name
-													? " self-center lg:mt-2"
-													: "")
-											}
-										>
-											<button
-												className={
-													`bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full` +
-													(errors.initial_date ||
-													errors.final_date ||
-													errors.unit_name
-														? " opacity-50 cursor-not-allowed"
-														: "")
-												}
-												type="submit"
-												style={{ transition: "all .15s ease" }}
-											>
-												<div className="inline-flex items-center">Buscar</div>
-											</button>
-											<button
-												className="bg-blue-900 text-white active:bg-gray-700 text-base font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 w-full"
-												style={{ transition: "all .15s ease" }}
-											>
-												<div className="inline-flex items-center">Exportar</div>
-											</button>
-										</div>
-									</form>
-									<div className="flex flex-col">
-										<label className="block text-gray-700 dark:text-gray-100 text-base font-bold mb-2 ml-2">
-											Buscar por Conductor
-										</label>
-										<InputSearch label="Buscar..." />
-									</div>
-								</div>
-								<div className="bg-white dark:bg-gray-800">
-									<div className="pt-1">
-										<div className="mx-auto flex items-center space-x-2 sm:px-3 lg:max-w-full lg:px-0 dark:bg-gray-800">
-											<section className="antialiased text-gray-600 w-full">
-												Talle
-											</section>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-					</div>
-				</div>
-			</div>
+			<ComplianceTable
+				handleSubmit={handleSubmit}
+				onSubmitForm={onSubmitForm}
+				control={control}
+				errors={errors}
+				searchEvents={searchEvents}
+				ExportToExcel={ExportToExcel}
+				search={search}
+				onSearchChange={onSearchChange}
+				filteredEvents={filteredEvents}
+				loading={loading}
+				prevPage={prevPage}
+				nextPage={nextPage}
+			/>
 		</section>
 	);
 };
