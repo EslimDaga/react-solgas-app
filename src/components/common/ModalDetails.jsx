@@ -6,20 +6,25 @@ const ModalDetails = ({ event, closeModal }) => {
 	let duration_in_app;
 
 	if (event.game_time < 60) {
-		duration_game = event.game_time;
+		duration_game = `${event.game_time} Segundos`;
 	} else {
-		duration_game = Duration.fromObject({ seconds: event.game_time }).as(
-			"minutes"
-		);
+		duration_game =
+			parseInt(
+				Duration.fromObject({ seconds: event.game_time }).as("minutes")
+			) + " Minutos";
 	}
 
 	if (event.duration_time < 60) {
-		duration_in_app = event.duration_time;
+		duration_in_app = `${event.duration_time} Segundos`;
 	} else {
-		duration_in_app = Duration.fromObject({ seconds: event.duration_time }).as(
-			"minutes"
-		);
+		duration_in_app =
+			parseInt(
+				Duration.fromObject({ seconds: event.duration_time }).as("minutes")
+			) + " Minutos";
 	}
+
+	console.log(duration_game);
+	console.log(duration_in_app);
 
 	return (
 		<>
@@ -157,7 +162,7 @@ const ModalDetails = ({ event, closeModal }) => {
 															Tiempo en la App
 														</p>
 														<p className="text-white font-bold">
-															{parseInt(duration_in_app)} Segundos
+															{duration_in_app}
 														</p>
 													</div>
 												</div>
@@ -172,7 +177,7 @@ const ModalDetails = ({ event, closeModal }) => {
 															Tiempo en el Juego
 														</p>
 														<p className="text-white font-bold">
-															{parseInt(duration_game)} Segundos
+															{duration_game}
 														</p>
 													</div>
 												</div>
