@@ -33,6 +33,7 @@ const FormSerchCompliance = ({
 								//onChange={(date) => setStartDate(date)}
 								onChange={date => field.onChange(date)}
 								placeholderText="Seleccionar Fecha"
+								dateFormat="dd/MM/yyy"
 							/>
 						)}
 					/>
@@ -63,6 +64,7 @@ const FormSerchCompliance = ({
 								selected={field.value}
 								onChange={date => field.onChange(date)}
 								placeholderText="Seleccionar Fecha"
+								dateFormat="dd/MM/yyy"
 							/>
 						)}
 					/>
