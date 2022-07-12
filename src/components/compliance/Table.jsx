@@ -36,6 +36,12 @@ const Table = ({ filteredEvents, search, loading }) => {
 												>
 													Cantidad
 												</th>
+												<th
+													scope="col"
+													className="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+												>
+													Porcentaje
+												</th>
 											</tr>
 										</thead>
 										<tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
@@ -52,6 +58,9 @@ const Table = ({ filteredEvents, search, loading }) => {
 													</td>
 													<td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
 														{event.count}
+													</td>
+													<td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-500 dark:text-gray-100">
+														{event.percentage} %
 													</td>
 												</tr>
 											))}
